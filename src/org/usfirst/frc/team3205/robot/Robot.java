@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
+
 import org.usfirst.frc.team3205.robot.subsystems.Climber;
 //import org.usfirst.frc.team3205.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3205.robot.subsystems.DriveTrain;
 //import org.usfirst.frc.team3205.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team3205.robot.subsystems.Gear;
 import org.usfirst.frc.team3205.robot.subsystems.Hopper;
+import org.usfirst.frc.team3205.robot.subsystems.Vision;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static final Gear gear = new Gear(); 
 	public static final Climber climb = new Climber(); 
 	public static final Hopper box = new Hopper(); 
+	public static final Vision vision = new Vision(); 
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -128,7 +131,7 @@ public class Robot extends IterativeRobot {
 	public void updateSmartDashboard(){
 		box.updateSmartDashboard();
 		gear.updateSmartDashboard();
-		climb.updateSmartDashboard();
+		climb.updateSmartDashboard(); 
 		
 	}
 }
