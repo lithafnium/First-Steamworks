@@ -34,7 +34,10 @@ public class Vision extends Subsystem {
     private static final double RECT_WIDTH = 3.0;
     private static final double RECT_HEIGHT = 5.0;
     private static final double RECT_DISTANCE = 12.0;
-
+    
+    private static final double OPTIMAL_DEG = 60.0; //change later; 
+    boolean leftOfPeg = false; 
+    
     ArrayList<Rect> contours; 
     //TreeMap<Rect, MatofPoint> contours; 
 	//private VisionThread visionThread;
@@ -77,13 +80,14 @@ public class Vision extends Subsystem {
 		// Get a CvSink. This will capture Mats from the camera	
 		
 	}
-	public void processImages(){
+	public double processImages(){
 		CvSink cvSink = serverOne.getInstance().getVideo();
 		// Setup a CvSource. This will send images back to the Dashboard
 		CvSource outputStream = serverOne.getInstance().putVideo("Rectangle", IMG_WIDTH, IMG_HEIGHT);
 		if (cvSink.grabFrame(mat) == 0) {
 			// Send the output the error.
 			outputStream.notifyError(cvSink.getError());
+			return -1.0; 
 
 		}
 		else{
@@ -96,15 +100,20 @@ public class Vision extends Subsystem {
 	            //pipeLine.filterContoursOutput().get(i).size(); 
 
 			}
+			outputStream.putFrame(mat);
+
 			// sorts contours by size
 			Collections.sort(contours, new compareRectSize());
 			
 			if(contours.size() >= 2){
 				double angle = getTheta(contours.get(0), contours.get(1)); 
-
+				// to the left or right of the peg 
+				leftOfPeg = contours.get(0).x < contours.get(1).x ? true : false; 
+				// angle you have to turn to; 
+				return angle; 
 			}
+			else return distanceToTarget(contours.get(0)); 
 			
-			outputStream.putFrame(mat);
 		}
 	}
 	public double distanceToTarget(Rect rectangle) {
