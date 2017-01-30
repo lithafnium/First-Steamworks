@@ -79,7 +79,11 @@ public class Vision extends Subsystem {
 			
 			// Give the output stream a new image to display
 			pipeLine.process(mat);
-            Rect r = Imgproc.boundingRect(pipeLine.filterContoursOutput().get(0));
+			for(int i = 0; i < pipeLine.filterContoursOutput().size(); i++){
+	            Rect r = Imgproc.boundingRect(pipeLine.filterContoursOutput().get(i));
+	            //pipeLine.filterContoursOutput().get(i).size(); 
+
+			}
 
 			outputStream.putFrame(mat);
 		}

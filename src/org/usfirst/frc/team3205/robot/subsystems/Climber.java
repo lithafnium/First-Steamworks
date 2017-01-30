@@ -3,6 +3,7 @@ package org.usfirst.frc.team3205.robot.subsystems;
 import org.usfirst.frc.team3205.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,12 +19,16 @@ public class Climber extends Subsystem {
 	private SpeedController one; 
 	private SpeedController two; 
 	private DigitalInput climbLimit;
+	private PowerDistributionPanel pdp; 
+
 
     
 	public Climber(){
 		one = new Talon(RobotMap.CLIMBER_ONE); 
 		two = new Talon(RobotMap.CLIMBER_TWO); 
 		climbLimit = new DigitalInput(RobotMap.IS_UP); 
+		pdp = new PowerDistributionPanel(RobotMap.CLIMBER_ONE); 
+
 	}
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -41,10 +46,12 @@ public class Climber extends Subsystem {
 		one.set(0.0); 
 		two.set(0.0); 
 	}
-	
+	public double getCurrent(){
+		return pdp.getCurrent(1); 
+	}
 	public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
-    	SmartDashboard.putBoolean("Drive Encoder Two", climbingLimit());
+    	SmartDashboard.putBoolean("Hit climb", climbingLimit());
     }
     
 }
