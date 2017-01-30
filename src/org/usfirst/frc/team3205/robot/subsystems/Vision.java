@@ -1,5 +1,9 @@
 package org.usfirst.frc.team3205.robot.subsystems;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -25,8 +29,14 @@ public class Vision extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	private static final int IMG_WIDTH = 320;
-	private static final int IMG_HEIGHT = 240;
+    private static final int IMG_HEIGHT = 240;
+    private static final double FOV_DEG = 34.3;
+    private static final double RECT_WIDTH = 3.0;
+    private static final double RECT_HEIGHT = 5.0;
+    private static final double RECT_DISTANCE = 12.0;
 
+    ArrayList<Rect> contours; 
+    //TreeMap<Rect, MatofPoint> contours; 
 	//private VisionThread visionThread;
 	private double centerX = 0.0;
 	public Mat mat; 
@@ -34,6 +44,7 @@ public class Vision extends Subsystem {
 	public Vision(){
 		mat = new Mat(); 
 		pipeLine = new Pipeline(); 
+		contours = new ArrayList<>(); 
 		
 	}
 
@@ -81,12 +92,46 @@ public class Vision extends Subsystem {
 			pipeLine.process(mat);
 			for(int i = 0; i < pipeLine.filterContoursOutput().size(); i++){
 	            Rect r = Imgproc.boundingRect(pipeLine.filterContoursOutput().get(i));
+	            contours.add(r); 
 	            //pipeLine.filterContoursOutput().get(i).size(); 
 
 			}
+			// sorts contours by size
+			Collections.sort(contours, new compareRectSize());
+			
+			if(contours.size() >= 2){
+				double angle = getTheta(contours.get(0), contours.get(1)); 
 
+			}
+			
 			outputStream.putFrame(mat);
 		}
 	}
+	public double distanceToTarget(Rect rectangle) {
+        int height = rectangle.height;
+        double fovRad = FOV_DEG * Math.PI / 180;
+        double ratio = height / IMG_HEIGHT;
+        double theta = fovRad * ratio;
+        double distance = RECT_HEIGHT / theta;
+        return distance;
+    }
+    
+    public double getTheta(Rect rect1, Rect rect2) {
+        double dist1 = distanceToTarget(rect1);
+        double dist2 = distanceToTarget(rect2);
+        double dist3 = RECT_DISTANCE;
+        double theta = Math.acos((dist1 * dist1 + dist2 * dist2- dist3 * dist3) / (2 * dist1 * dist2));
+        return theta;
+    }
+    class compareRectSize implements Comparator<Rect>{
+
+		@Override
+		public int compare(Rect contourOne, Rect contourTwo) {
+			// TODO Auto-generated method stub
+			return contourTwo.height * contourTwo.width - contourOne.height * contourOne.width; 
+		}
+    	
+    }
 }
+
 
