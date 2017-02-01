@@ -111,6 +111,47 @@ public class Vision extends Subsystem {
 			
 		}
 	}
+	public double moveToPeg(){
+		if(contours.size() >= 2){
+			double sideOne = distanceToTarget(contours.get(0)); 
+			double sideTwo = distanceToTarget(contours.get(1)); 
+			
+			double area = area(sideOne, sideTwo); 
+			double height = calculateHeight(area); 
+			
+			double base = sideOne > sideTwo ? findBase(sideOne, height) : findBase(sideTwo, height);  
+			double smallerHypot = sideOne > sideTwo ? findSmallHypot(sideOne, base) : findSmallHypot(sideTwo, base); 
+			
+			double distance = sideOne > sideTwo ? calculateDistanceToPeg(sideOne, smallerHypot) : calculateDistanceToPeg(sideTwo, smallerHypot); 
+			
+			return distance; 
+		}
+		return -1; 
+	}
+	public double area(double sideOne, double sideTwo){
+		double sideThree = 6.0; 
+		double s = (sideOne + sideTwo + sideThree)/2; // semiperimeter
+		double area = Math.sqrt(s*(s - sideOne)*(s - sideTwo)*(s - sideThree)); 
+		return area; 
+	}
+	public double calculateHeight(double area){
+		return area * 2 / 6; 
+	}
+	// finds the base of the right triangle formed, with the hypotenuse being the longer side 
+	// of the triangle formed by the distances from the tape
+	public double findBase(double hypot, double height){
+		return Math.sqrt(Math.pow(hypot, 2) - Math.pow(height, 2)); 
+	}
+	
+	// finds the distance from which the peg if extended hits the side 
+	public double findSmallHypot(double largerHypot, double largerBase){
+		return (2/largerBase) * largerHypot; 
+	}
+	// distance to travel and turn towards the peg
+	public double calculateDistanceToPeg(double largerDistance, double smallerDistance){
+		return largerDistance - smallerDistance; 
+	}
+	
 	// distance to the target using apparent size 
 	public double distanceToTarget(Rect rectangle) {
         int height = rectangle.height;
