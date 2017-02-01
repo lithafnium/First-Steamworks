@@ -24,6 +24,7 @@ public class RobotMap {
 	//LIMIT SWITCHES 
 	public static final int IS_GEAR_IN = 5; 
 	public static final int IS_UP = 9; 
+	public static final int IF_FLAP_OUT = 10; 
 
 	//LINEAR ACTUATORS
 	public static final int PUSH_EM_OUT = 6; // push gear out port

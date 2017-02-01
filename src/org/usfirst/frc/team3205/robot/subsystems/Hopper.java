@@ -27,6 +27,7 @@ public class Hopper extends Subsystem {
 	public Hopper(){
 		intake = new Talon(RobotMap.INTAKE); 
 		hopperOne = new Servo(RobotMap.INTAKE_FLAP_OUT); 
+		flapOut = new DigitalInput(RobotMap.IF_FLAP_OUT); 
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
