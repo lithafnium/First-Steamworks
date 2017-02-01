@@ -29,7 +29,14 @@ public class RobotMap {
 	//LINEAR ACTUATORS
 	public static final int PUSH_EM_OUT = 6; // push gear out port
 
+	//ULTRASONIC SENSORS 
+	public static final int ULTRA_TRIGGER_INPUT_ONE = 14; 
+	public static final int ULTRA_PULSE_OUTPUT_ONE = 15; 
 	
+	public static final int ULTRA_TRIGGER_INPUT_TWO = 18; 
+	public static final int ULTRA_PULSE_OUTPUT_TWO = 20; 
+
+
 	// MOTOR PORTS 
 	public static final int LEFT_DRIVETRAIN_MOTOR = 0; 
 	public static final int RIGHT_DRIVETRAIN_MOTOR = 1; 
@@ -38,5 +45,14 @@ public class RobotMap {
 	public static final int CLIMBER_TWO = 3; 
 	
 	public static final int INTAKE = 7; 
-	public static final int INTAKE_FLAP_OUT = 8; 
+	public static final int INTAKE_FLAP_OUT_ONE = 8; 
+	public static final int INTAKE_FLAP_OUT_TWO = 11; 
+	
+	// VISION 
+	public static final int IMG_WIDTH = 320;
+    public static final int IMG_HEIGHT = 240;
+    public static final double FOV_DEG = 34.3;
+    public static final double RECT_WIDTH = 3.0;
+    public static final double RECT_HEIGHT = 5.0;
+    public static final double RECT_DISTANCE = 12.0;
 }

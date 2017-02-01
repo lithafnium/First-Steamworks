@@ -17,7 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveTrain extends Subsystem {
 	private SpeedController left; 
 	private SpeedController right;
-	private Ultrasonic ultra; 
+	private Ultrasonic ultraOne;
+	private Ultrasonic ultraTwo; 
 
 	Encoder one; 
 	Encoder two; 
@@ -26,10 +27,15 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain(){
 		left = new Spark(RobotMap.LEFT_DRIVETRAIN_MOTOR); 
 		right = new Spark(RobotMap.RIGHT_DRIVETRAIN_MOTOR); 
+		
 		robotDrive = new RobotDrive(left, right); 
 		robotDrive.setSafetyEnabled(false);
-		//ultra = new Ultrasonic(0, 0); 
-
+		
+		ultraOne = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_ONE, RobotMap.ULTRA_TRIGGER_INPUT_ONE); 
+		ultraTwo = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_TWO, RobotMap.ULTRA_TRIGGER_INPUT_TWO); 
+		
+		one = new Encoder(0,1, false, Encoder.EncodingType.k4X);
+		two = new Encoder(2,3, false, Encoder.EncodingType.k4X);
 	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -48,10 +54,38 @@ public class DriveTrain extends Subsystem {
 		robotDrive.tankDrive(0.5, 0.5); 
 	}
 	
-	public double getDistance(){
-		return ultra.getRangeInches(); 
+	public double getDistanceOne(){
+		return ultraOne.getRangeInches(); 
 	}
 	
+	public double getDistanceTwo(){
+		return ultraTwo.getRangeInches(); 
+	}
+	
+	public void reset1stEncoder(){
+    	one.reset();
+    }
+    
+    public void reset2ndEncoder(){
+    	two.reset();
+    }
+    
+    public double getEncoderOne(){
+    	return one.getDistance();
+    }
+   
+    public double getEncoderTwo(){
+    	return two.getDistance();
+    }
+	
+	public void updateSmartDashboard(){
+		SmartDashboard.putNumber("Ultrasonic sensor one", getDistanceOne()); 
+		SmartDashboard.putNumber("Ultrasonic sensor two", getDistanceTwo()); 
+		
+		SmartDashboard.putNumber("Drive Encoder One", getEncoderOne());
+    	SmartDashboard.putNumber("Drive Encoder Two", getEncoderTwo());
+
+	}
 	
 	
 }

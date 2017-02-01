@@ -17,16 +17,17 @@ public class Hopper extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private SpeedController intake; 
+	private SpeedController intake; // maybe take out
 	private Servo hopperOne;
-	private Servo hoperTwo; 
+	private Servo hopperTwo; 
 	private DigitalInput flapOut; 
 
 
 	
 	public Hopper(){
 		intake = new Talon(RobotMap.INTAKE); 
-		hopperOne = new Servo(RobotMap.INTAKE_FLAP_OUT); 
+		hopperOne = new Servo(RobotMap.INTAKE_FLAP_OUT_ONE); 
+		hopperTwo = new Servo(RobotMap.INTAKE_FLAP_OUT_TWO);
 		flapOut = new DigitalInput(RobotMap.IS_FLAP_OUT); 
 
 	}
@@ -43,14 +44,17 @@ public class Hopper extends Subsystem {
     }
     public void stop(){
     	intake.set(0.0);
+    	
     }
     
     public void dump(){
     	hopperOne.set(1);
+    	hopperTwo.set(1); 
     }
     
     public void retract(){
     	hopperOne.set(0);
+    	hopperTwo.set(0); 
     }
     
     public void updateSmartDashboard(){

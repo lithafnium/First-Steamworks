@@ -11,6 +11,7 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.core.Rect; 
 //import com.ni.vision.NIVision.Rect;
 
+import org.usfirst.frc.team3205.robot.RobotMap;
 import org.usfirst.frc.team3205.robot.commands.startCameraStream;
 
 import edu.wpi.cscore.CvSink;
@@ -28,12 +29,7 @@ public class Vision extends Subsystem {
 	Pipeline pipeLine; 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private static final int IMG_WIDTH = 320;
-    private static final int IMG_HEIGHT = 240;
-    private static final double FOV_DEG = 34.3;
-    private static final double RECT_WIDTH = 3.0;
-    private static final double RECT_HEIGHT = 5.0;
-    private static final double RECT_DISTANCE = 12.0;
+	
     
     private static final double OPTIMAL_DEG = 60.0; //change later; 
     boolean leftOfPeg = false; 
@@ -61,21 +57,20 @@ public class Vision extends Subsystem {
 		synchronized (imgLock) {
 			centerX = this.centerX;
 		}
-		double turn = centerX - (IMG_WIDTH / 2);
-		//drive.arcadeDrive(-0.6, turn * 0.005);
+		double turn = centerX - (RobotMap.IMG_WIDTH / 2);
 	}
 	public void cameraInit(){
-		//serverOne = CameraServer.getInstance();
+		serverOne = CameraServer.getInstance();
 	}
 	public void cameraStream(){
 	
 		
 
-//		UsbCamera camera = serverOne.startAutomaticCapture("cam0", 0);
-//		// Set the resolution
-//		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
-//		camera.setBrightness(50);
-//		camera.setExposureManual(50); 
+		UsbCamera camera = serverOne.startAutomaticCapture("cam0", 0);
+		// Set the resolution
+		camera.setResolution(RobotMap.IMG_WIDTH, RobotMap.IMG_HEIGHT);
+		camera.setBrightness(50);
+		camera.setExposureManual(50); 
 
 		// Get a CvSink. This will capture Mats from the camera	
 		
@@ -83,7 +78,7 @@ public class Vision extends Subsystem {
 	public double processImages(){
 		CvSink cvSink = serverOne.getInstance().getVideo();
 		// Setup a CvSource. This will send images back to the Dashboard
-		CvSource outputStream = serverOne.getInstance().putVideo("Rectangle", IMG_WIDTH, IMG_HEIGHT);
+		CvSource outputStream = serverOne.getInstance().putVideo("Rectangle", RobotMap.IMG_WIDTH, RobotMap.IMG_HEIGHT);
 		if (cvSink.grabFrame(mat) == 0) {
 			// Send the output the error.
 			outputStream.notifyError(cvSink.getError());
@@ -116,22 +111,24 @@ public class Vision extends Subsystem {
 			
 		}
 	}
+	// distance to the target using apparent size 
 	public double distanceToTarget(Rect rectangle) {
         int height = rectangle.height;
-        double fovRad = FOV_DEG * Math.PI / 180;
-        double ratio = height / IMG_HEIGHT;
+        double fovRad = RobotMap.FOV_DEG * Math.PI / 180;
+        double ratio = height / RobotMap.IMG_HEIGHT;
         double theta = fovRad * ratio;
-        double distance = RECT_HEIGHT / theta;
+        double distance = RobotMap.RECT_HEIGHT / theta;
         return distance;
     }
-    
+    // gets the angle between looking at two contours --> the rectangles 
     public double getTheta(Rect rect1, Rect rect2) {
         double dist1 = distanceToTarget(rect1);
         double dist2 = distanceToTarget(rect2);
-        double dist3 = RECT_DISTANCE;
+        double dist3 = RobotMap.RECT_DISTANCE;
         double theta = Math.acos((dist1 * dist1 + dist2 * dist2- dist3 * dist3) / (2 * dist1 * dist2));
         return theta;
     }
+    // sorts the rectangles by size --> size of the contours 
     class compareRectSize implements Comparator<Rect>{
 
 		@Override
