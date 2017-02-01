@@ -65,17 +65,17 @@ public class Vision extends Subsystem {
 		//drive.arcadeDrive(-0.6, turn * 0.005);
 	}
 	public void cameraInit(){
-		serverOne = CameraServer.getInstance();
+		//serverOne = CameraServer.getInstance();
 	}
 	public void cameraStream(){
 	
 		
 
-		UsbCamera camera = serverOne.startAutomaticCapture("cam0", 0);
-		// Set the resolution
-		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
-		camera.setBrightness(50);
-		camera.setExposureManual(50); 
+//		UsbCamera camera = serverOne.startAutomaticCapture("cam0", 0);
+//		// Set the resolution
+//		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+//		camera.setBrightness(50);
+//		camera.setExposureManual(50); 
 
 		// Get a CvSink. This will capture Mats from the camera	
 		

@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
 		right = new Spark(RobotMap.RIGHT_DRIVETRAIN_MOTOR); 
 		robotDrive = new RobotDrive(left, right); 
 		robotDrive.setSafetyEnabled(false);
-		ultra = new Ultrasonic(0, 0); 
+		//ultra = new Ultrasonic(0, 0); 
 
 	}
 	public void initDefaultCommand() {
