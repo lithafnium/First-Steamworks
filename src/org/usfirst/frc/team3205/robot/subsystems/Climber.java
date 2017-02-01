@@ -47,11 +47,19 @@ public class Climber extends Subsystem {
 		two.set(0.0); 
 	}
 	public double getCurrent(){
-		return pdp.getCurrent(1); 
+		return pdp.getCurrent(RobotMap.PDP_PORT); 
+	}
+	
+	public boolean motorStall(){
+		return (pdp.getCurrent(RobotMap.PDP_PORT) > 1000);
+			
 	}
 	public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
     	SmartDashboard.putBoolean("Hit climb", climbingLimit());
+    	SmartDashboard.putNumber("Current", getCurrent());
+
+    	
     }
     
 }

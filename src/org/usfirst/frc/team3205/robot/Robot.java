@@ -133,6 +133,7 @@ public class Robot extends IterativeRobot {
 		box.updateSmartDashboard();
 		gear.updateSmartDashboard();
 		climb.updateSmartDashboard(); 
+		driveTrain.updateSmartDashboard();
 		
 	}
 }

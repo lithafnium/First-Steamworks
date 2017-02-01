@@ -55,4 +55,7 @@ public class RobotMap {
     public static final double RECT_WIDTH = 3.0;
     public static final double RECT_HEIGHT = 5.0;
     public static final double RECT_DISTANCE = 12.0;
+    
+    //MISC 
+    public static final int PDP_PORT = 30; // pdp for the climber 
 }
