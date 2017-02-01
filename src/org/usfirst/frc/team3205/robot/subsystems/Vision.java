@@ -104,8 +104,8 @@ public class Vision extends Subsystem {
 				double angle = getTheta(contours.get(0), contours.get(1)); 
 				// to the left or right of the peg 
 				leftOfPeg = contours.get(0).x < contours.get(1).x ? true : false; 
-				// angle you have to turn to; 
-				return angle; 
+				// angle you have to turn to / 2, as you're rotating to the side   
+				return angle/2; 
 			}
 			else return distanceToTarget(contours.get(0)); 
 			
@@ -123,9 +123,11 @@ public class Vision extends Subsystem {
 			double smallerHypot = sideOne > sideTwo ? findSmallHypot(sideOne, base) : findSmallHypot(sideTwo, base); 
 			
 			double distance = sideOne > sideTwo ? calculateDistanceToPeg(sideOne, smallerHypot) : calculateDistanceToPeg(sideTwo, smallerHypot); 
-			
+			contours = new ArrayList<Rect>(); // resets the arrayList 
 			return distance; 
 		}
+		contours = new ArrayList<Rect>(); // resets the arrayList 
+
 		return -1; 
 	}
 	public double area(double sideOne, double sideTwo){
