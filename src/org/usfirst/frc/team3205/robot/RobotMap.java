@@ -54,7 +54,10 @@ public class RobotMap {
     public static final double FOV_DEG = 34.3;
     public static final double RECT_WIDTH = 3.0;
     public static final double RECT_HEIGHT = 5.0;
-    public static final double RECT_DISTANCE = 12.0;
+    public static final double RECT_DISTANCE = 6.25;
+    
+    //DRIVEBASE stuff 
+    public static final int GYRO_PORT = 50; 
     
     //MISC 
     public static final int PDP_PORT = 30; // pdp for the climber 

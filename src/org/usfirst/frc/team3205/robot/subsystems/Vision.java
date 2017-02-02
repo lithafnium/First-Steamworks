@@ -29,6 +29,7 @@ public class Vision extends Subsystem {
 	Pipeline pipeLine; 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
+	public double smallerHypot = 0.0; 
 	
     
     private static final double OPTIMAL_DEG = 60.0; //change later; 
@@ -101,7 +102,7 @@ public class Vision extends Subsystem {
 			Collections.sort(contours, new compareRectSize());
 			
 			if(contours.size() >= 2){
-				double angle = getTheta(contours.get(0), contours.get(1)); 
+				double angle = getTheta(distanceToTarget(contours.get(0)), distanceToTarget(contours.get(1)), RobotMap.RECT_DISTANCE); 
 				// to the left or right of the peg 
 				leftOfPeg = contours.get(0).x < contours.get(1).x ? true : false; 
 				// angle you have to turn to / 2, as you're rotating to the side   
@@ -111,18 +112,33 @@ public class Vision extends Subsystem {
 			
 		}
 	}
+	// find the angle to turn once you centered the robot on the peg 
+	public double findAngleToTurn(){
+		double altitude = findAltitude(smallerHypot);
+		return getTheta(smallerHypot, altitude, RobotMap.RECT_DISTANCE/2); 
+		
+	}
+	// finds the distance from which you move towards the peg (doesn't move right to it, 
+	// moves at the point where it meets the peg if the peg was extended further 
 	public double moveToPeg(){
 		if(contours.size() >= 2){
-			double sideOne = distanceToTarget(contours.get(0)); 
-			double sideTwo = distanceToTarget(contours.get(1)); 
 			
-			double area = area(sideOne, sideTwo); 
-			double height = calculateHeight(area); 
+			double sideOne = distanceToTarget(contours.get(0)); // distance to one contour
+			double sideTwo = distanceToTarget(contours.get(1)); // distance to the other 
 			
-			double base = sideOne > sideTwo ? findBase(sideOne, height) : findBase(sideTwo, height);  
-			double smallerHypot = sideOne > sideTwo ? findSmallHypot(sideOne, base) : findSmallHypot(sideTwo, base); 
+			double largerSide = sideOne > sideTwo ? sideOne : sideTwo; 
 			
-			double distance = sideOne > sideTwo ? calculateDistanceToPeg(sideOne, smallerHypot) : calculateDistanceToPeg(sideTwo, smallerHypot); 
+			double area = area(sideOne, sideTwo); // area of the trignale formed 
+			double height = calculateHeight(area);  // height of the triangle formed 
+			
+			// finds the base of the right triangle formed with the larger distnace as the hypot
+			double base =findBase(largerSide, height);  
+			
+			// finds the length of the smaller hypotenuse, the end of which meets the end of the peg 
+			smallerHypot =  findSmallHypot(largerSide, base); 
+			
+			// calculates the distance the robot has to move 
+			double distance =  calculateDistanceToPeg(largerSide, smallerHypot); 
 			contours = new ArrayList<Rect>(); // resets the arrayList 
 			return distance; 
 		}
@@ -130,14 +146,16 @@ public class Vision extends Subsystem {
 
 		return -1; 
 	}
+	// area of the triangle formed with the tape being the end points, the legs being distances to the tape
 	public double area(double sideOne, double sideTwo){
-		double sideThree = 6.0; 
+		double sideThree = RobotMap.RECT_DISTANCE; 
 		double s = (sideOne + sideTwo + sideThree)/2; // semiperimeter
 		double area = Math.sqrt(s*(s - sideOne)*(s - sideTwo)*(s - sideThree)); 
 		return area; 
 	}
+	// calculates the height of the triangle before moving 
 	public double calculateHeight(double area){
-		return area * 2 / 6; 
+		return area * 2 / RobotMap.RECT_DISTANCE; 
 	}
 	// finds the base of the right triangle formed, with the hypotenuse being the longer side 
 	// of the triangle formed by the distances from the tape
@@ -153,6 +171,10 @@ public class Vision extends Subsystem {
 	public double calculateDistanceToPeg(double largerDistance, double smallerDistance){
 		return largerDistance - smallerDistance; 
 	}
+	// use only when you moved the robot to the right place - in front of the peg 
+	public double findAltitude(double hypot){
+		return Math.pow(hypot,  2) - Math.pow(3, 2); 
+	}
 	
 	// distance to the target using apparent size 
 	public double distanceToTarget(Rect rectangle) {
@@ -164,10 +186,8 @@ public class Vision extends Subsystem {
         return distance;
     }
     // gets the angle between looking at two contours --> the rectangles 
-    public double getTheta(Rect rect1, Rect rect2) {
-        double dist1 = distanceToTarget(rect1);
-        double dist2 = distanceToTarget(rect2);
-        double dist3 = RobotMap.RECT_DISTANCE;
+    public double getTheta(double dist1, double dist2, double dist3) {
+      
         double theta = Math.acos((dist1 * dist1 + dist2 * dist2- dist3 * dist3) / (2 * dist1 * dist2));
         return theta;
     }

@@ -3,6 +3,7 @@ package org.usfirst.frc.team3205.robot.subsystems;
 import org.usfirst.frc.team3205.robot.RobotMap;
 import org.usfirst.frc.team3205.robot.commands.drive;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -19,6 +20,8 @@ public class DriveTrain extends Subsystem {
 	private SpeedController right;
 	private Ultrasonic ultraOne;
 	private Ultrasonic ultraTwo; 
+	
+	AnalogGyro gyroSensor; 
 
 	Encoder one; 
 	Encoder two; 
@@ -36,6 +39,8 @@ public class DriveTrain extends Subsystem {
 		
 		one = new Encoder(0,1, false, Encoder.EncodingType.k4X);
 		two = new Encoder(2,3, false, Encoder.EncodingType.k4X);
+		
+		gyroSensor = new AnalogGyro(RobotMap.GYRO_PORT); 
 	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -78,12 +83,21 @@ public class DriveTrain extends Subsystem {
     	return two.getDistance();
     }
 	
+    public double getAngle(){
+    	return gyroSensor.getAngle(); 
+    }
+    
+    public void resetGyro(){
+    	gyroSensor.reset(); 
+    }
 	public void updateSmartDashboard(){
 		SmartDashboard.putNumber("Ultrasonic sensor one", getDistanceOne()); 
 		SmartDashboard.putNumber("Ultrasonic sensor two", getDistanceTwo()); 
 		
 		SmartDashboard.putNumber("Drive Encoder One", getEncoderOne());
     	SmartDashboard.putNumber("Drive Encoder Two", getEncoderTwo());
+    	
+    	SmartDashboard.putNumber("Angle", getAngle()); 
 
 	}
 	
