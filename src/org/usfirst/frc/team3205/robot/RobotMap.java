@@ -38,8 +38,12 @@ public class RobotMap {
 
 
 	// MOTOR PORTS 
-	public static final int LEFT_DRIVETRAIN_MOTOR = 0; 
-	public static final int RIGHT_DRIVETRAIN_MOTOR = 1; 
+	public static final int TOP_LEFT_DRIVETRAIN_MOTOR = 0; 
+	public static final int BOTTOM_LEFT_DRIVETRAIN_MOTOR = 1; 
+
+	public static final int TOP_RIGHT_DRIVETRAIN_MOTOR = 40; 
+	public static final int BOTTOM_RIGHT_DRIVETRAIN_MOTOR = 60; 
+
 	
 	public static final int CLIMBER_ONE = 2; 
 	public static final int CLIMBER_TWO = 3; 

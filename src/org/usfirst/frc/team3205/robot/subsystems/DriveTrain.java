@@ -16,8 +16,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
-	private SpeedController left; 
-	private SpeedController right;
+	private SpeedController topLeft; 
+	private SpeedController topRight;
+	private SpeedController bottomLeft; 
+	private SpeedController bottomRight;
 	private Ultrasonic ultraOne;
 	private Ultrasonic ultraTwo; 
 	
@@ -28,10 +30,13 @@ public class DriveTrain extends Subsystem {
 	RobotDrive robotDrive; 
 	
 	public DriveTrain(){
-		left = new Talon(RobotMap.LEFT_DRIVETRAIN_MOTOR); 
-		right = new Talon(RobotMap.RIGHT_DRIVETRAIN_MOTOR); 
+		topLeft = new Talon(RobotMap.TOP_LEFT_DRIVETRAIN_MOTOR); 
+		topRight = new Talon(RobotMap.TOP_RIGHT_DRIVETRAIN_MOTOR); 
+		bottomLeft = new Talon(RobotMap.BOTTOM_LEFT_DRIVETRAIN_MOTOR); 
+		bottomRight = new Talon(RobotMap.BOTTOM_RIGHT_DRIVETRAIN_MOTOR);
 		
-		robotDrive = new RobotDrive(left, right); 
+		
+		robotDrive = new RobotDrive(topLeft, bottomLeft,  topRight, bottomRight); 
 		robotDrive.setSafetyEnabled(false);
 		
 		ultraOne = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_ONE, RobotMap.ULTRA_TRIGGER_INPUT_ONE); 
