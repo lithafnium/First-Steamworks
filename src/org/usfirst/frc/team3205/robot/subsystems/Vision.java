@@ -12,7 +12,7 @@ import org.opencv.core.Rect;
 //import com.ni.vision.NIVision.Rect;
 
 import org.usfirst.frc.team3205.robot.RobotMap;
-import org.usfirst.frc.team3205.robot.commands.startCameraStream;
+import org.usfirst.frc.team3205.robot.commands.visionStartCameraStream;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -30,10 +30,11 @@ public class Vision extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	public double smallerHypot = 0.0; 
+	public double altitude = 0.0; 
 	
     
     private static final double OPTIMAL_DEG = 60.0; //change later; 
-    boolean leftOfPeg = false; 
+    public boolean leftOfPeg = false; 
     
     ArrayList<Rect> contours; 
     //TreeMap<Rect, MatofPoint> contours; 
@@ -51,15 +52,15 @@ public class Vision extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		//setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new startCameraStream()); 
+		setDefaultCommand(new visionStartCameraStream()); 
 	}
-	public void calculate(){
-		double centerX;
-		synchronized (imgLock) {
-			centerX = this.centerX;
-		}
-		double turn = centerX - (RobotMap.IMG_WIDTH / 2);
-	}
+//	public void calculate(){
+//		//double centerX;
+//		synchronized (imgLock) {
+//			centerX = this.centerX;
+//		}
+//		//double turn = centerX - (RobotMap.IMG_WIDTH / 2);
+//	}
 	public void cameraInit(){
 		serverOne = CameraServer.getInstance();
 	}
@@ -76,14 +77,14 @@ public class Vision extends Subsystem {
 		// Get a CvSink. This will capture Mats from the camera	
 		
 	}
-	public double processImages(){
-		CvSink cvSink = serverOne.getInstance().getVideo();
+	public void processImages(){
+		CvSink cvSink = CameraServer.getInstance().getVideo();
 		// Setup a CvSource. This will send images back to the Dashboard
-		CvSource outputStream = serverOne.getInstance().putVideo("Rectangle", RobotMap.IMG_WIDTH, RobotMap.IMG_HEIGHT);
+		CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", RobotMap.IMG_WIDTH, RobotMap.IMG_HEIGHT);
 		if (cvSink.grabFrame(mat) == 0) {
 			// Send the output the error.
 			outputStream.notifyError(cvSink.getError());
-			return -1.0; 
+			//return -1.0; 
 
 		}
 		else{
@@ -101,20 +102,24 @@ public class Vision extends Subsystem {
 			// sorts contours by size
 			Collections.sort(contours, new compareRectSize());
 			
-			if(contours.size() >= 2){
-				double angle = getTheta(distanceToTarget(contours.get(0)), distanceToTarget(contours.get(1)), RobotMap.RECT_DISTANCE); 
-				// to the left or right of the peg 
-				leftOfPeg = contours.get(0).x < contours.get(1).x ? true : false; 
-				// angle you have to turn to / 2, as you're rotating to the side   
-				return angle/2; 
-			}
-			else return distanceToTarget(contours.get(0)); 
+			
 			
 		}
 	}
+	// finds the angle from your original position 
+	public double findAngle(){
+		if(contours.size() >= 2){
+			double angle = getTheta(distanceToTarget(contours.get(0)), distanceToTarget(contours.get(1)), RobotMap.RECT_DISTANCE); 
+			// to the left or right of the peg 
+			leftOfPeg = contours.get(0).x < contours.get(1).x ? true : false; 
+			// angle you have to turn to / 2, as you're rotating to the side   
+			return angle/2; 
+		}
+		else return -2; 
+	}
 	// find the angle to turn once you centered the robot on the peg 
 	public double findAngleToTurn(){
-		double altitude = findAltitude(smallerHypot);
+		altitude = findAltitude(smallerHypot);
 		return getTheta(smallerHypot, altitude, RobotMap.RECT_DISTANCE/2); 
 		
 	}

@@ -55,7 +55,7 @@ public class RobotMap {
     public static final double RECT_WIDTH = 3.0;
     public static final double RECT_HEIGHT = 5.0;
     public static final double RECT_DISTANCE = 6.25;
-    
+    public static final double PEG_LENGTH = 5.0; 
     //DRIVEBASE stuff 
     public static final int GYRO_PORT = 50; 
     
