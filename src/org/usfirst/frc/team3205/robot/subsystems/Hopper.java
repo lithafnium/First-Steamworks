@@ -38,6 +38,7 @@ public class Hopper extends Subsystem {
     
     public void intake(){
     	intake.set(RobotMap.SUCKER);
+    	
     }
     public boolean isFlapOut(){
     	return flapOut.get(); 
@@ -60,6 +61,8 @@ public class Hopper extends Subsystem {
     public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
     	SmartDashboard.putBoolean("Flapout", isFlapOut());
+    	SmartDashboard.putNumber("Servo One", hopperOne.get()); 
+    	SmartDashboard.putNumber("Servo Two", hopperTwo.get()); 
     }
     
 }

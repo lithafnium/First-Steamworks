@@ -23,6 +23,7 @@ public class climber extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	// change later 
     	if(Robot.climb.climbingLimit()){
     		Robot.climb.stop(); 
     	}
