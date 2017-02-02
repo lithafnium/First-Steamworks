@@ -83,6 +83,9 @@ public class DriveTrain extends Subsystem {
     	return two.getDistance();
     }
 	
+    public void calibrateGyro(){
+    	gyroSensor.calibrate(); 
+    }
     public double getAngle(){
     	return gyroSensor.getAngle(); 
     }

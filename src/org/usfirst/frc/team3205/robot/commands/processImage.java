@@ -13,12 +13,14 @@ public class processImage extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.vision); 
+    	requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	double angle = Robot.vision.processImages(); 
     	double distance = Robot.vision.moveToPeg(); 
+    	double turnAngle = Robot.vision.findAngleToTurn(); 
     }
 
     // Called repeatedly when this Command is scheduled to run
