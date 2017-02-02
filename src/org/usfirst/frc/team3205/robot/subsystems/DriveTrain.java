@@ -6,7 +6,7 @@ import org.usfirst.frc.team3205.robot.commands.drive;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
+//import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -28,8 +28,8 @@ public class DriveTrain extends Subsystem {
 	RobotDrive robotDrive; 
 	
 	public DriveTrain(){
-		left = new Spark(RobotMap.LEFT_DRIVETRAIN_MOTOR); 
-		right = new Spark(RobotMap.RIGHT_DRIVETRAIN_MOTOR); 
+		left = new Talon(RobotMap.LEFT_DRIVETRAIN_MOTOR); 
+		right = new Talon(RobotMap.RIGHT_DRIVETRAIN_MOTOR); 
 		
 		robotDrive = new RobotDrive(left, right); 
 		robotDrive.setSafetyEnabled(false);

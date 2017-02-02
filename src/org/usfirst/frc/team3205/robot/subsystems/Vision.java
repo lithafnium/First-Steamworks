@@ -33,13 +33,13 @@ public class Vision extends Subsystem {
 	public double altitude = 0.0; 
 	
     
-    private static final double OPTIMAL_DEG = 60.0; //change later; 
+   // private static final double OPTIMAL_DEG = 60.0; //change later; 
     public boolean leftOfPeg = false; 
     
     ArrayList<Rect> contours; 
     //TreeMap<Rect, MatofPoint> contours; 
 	//private VisionThread visionThread;
-	private double centerX = 0.0;
+	//private double centerX = 0.0;
 	public Mat mat; 
 	private final Object imgLock = new Object();
 	public Vision(){

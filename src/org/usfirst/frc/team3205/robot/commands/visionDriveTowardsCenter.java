@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3205.robot.commands;
 
 import org.usfirst.frc.team3205.robot.Robot;
-import org.usfirst.frc.team3205.robot.RobotMap;
+//import org.usfirst.frc.team3205.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -22,7 +22,7 @@ public class visionDriveTowardsCenter extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	distanceToCenter =  distanceToCenter = Robot.vision.moveToPeg(); 
+    	distanceToCenter = Robot.vision.moveToPeg(); 
     	start = Robot.driveTrain.getEncoderOne(); 
     
     	Robot.driveTrain.driveCertainAmounts(0.5, 0.5);
@@ -30,6 +30,9 @@ public class visionDriveTowardsCenter extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(distanceToCenter == -1){
+    		done = true; 
+    	}
     	if(Robot.driveTrain.getEncoderOne() - start >= distanceToCenter){
     		Robot.driveTrain.stop();
     		done = true; 
