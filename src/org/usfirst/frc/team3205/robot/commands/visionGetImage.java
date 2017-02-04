@@ -13,7 +13,7 @@ public class visionGetImage extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.vision); 
-    	requires(Robot.driveTrain);
+    	//requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time

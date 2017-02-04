@@ -90,6 +90,7 @@ public class Vision extends Subsystem {
 		else{
 			
 			// Give the output stream a new image to display
+			// filters the image 
 			pipeLine.process(mat);
 			for(int i = 0; i < pipeLine.filterContoursOutput().size(); i++){
 	            Rect r = Imgproc.boundingRect(pipeLine.filterContoursOutput().get(i));

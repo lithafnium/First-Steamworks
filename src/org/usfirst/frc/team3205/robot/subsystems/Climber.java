@@ -3,6 +3,7 @@ package org.usfirst.frc.team3205.robot.subsystems;
 import org.usfirst.frc.team3205.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -20,6 +21,8 @@ public class Climber extends Subsystem {
 	private SpeedController two; 
 	private DigitalInput climbLimit;
 	private PowerDistributionPanel pdp; 
+	private Encoder climbDistance; 
+
 
 
     
@@ -28,6 +31,7 @@ public class Climber extends Subsystem {
 		two = new Talon(RobotMap.CLIMBER_TWO); 
 		climbLimit = new DigitalInput(RobotMap.IS_UP); 
 		pdp = new PowerDistributionPanel(RobotMap.CLIMBER_ONE); 
+		climbDistance = new Encoder(5, 6, false, Encoder.EncodingType.k4X); 
 
 	}
 	public void initDefaultCommand() {
@@ -37,6 +41,14 @@ public class Climber extends Subsystem {
 	public void climb(){
 		one.set(RobotMap.CLIMB_SPEED); 
 		two.set(RobotMap.CLIMB_SPEED);
+	}
+	
+	public double getDistance(){
+		return climbDistance.get(); 
+	}
+	
+	public void resetEncoder(){
+		climbDistance.reset(); 
 	}
 	
 	public boolean climbingLimit(){
