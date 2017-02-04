@@ -7,25 +7,22 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class intakeIn extends Command {
+public class flapOpen extends Command {
 
-    public intakeIn() {
+    public flapOpen() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.box); 
+    	requires(Robot.box);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.box.intake(); 
+    	Robot.box.openFlap();
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.box.isFlapOut()){
-    		Robot.box.stop();
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,7 +32,6 @@ public class intakeIn extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.box.stop(); 
     }
 
     // Called when another command which requires one or more of the same

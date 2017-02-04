@@ -20,15 +20,15 @@ public class Hopper extends Subsystem {
 	private SpeedController intake; // maybe take out
 	private Servo hopperOne;
 	private Servo hopperTwo; 
-	private DigitalInput flapOut; 
+	private DigitalInput isCoiled; 
 
 
 	
 	public Hopper(){
-		intake = new Talon(RobotMap.INTAKE); 
-		hopperOne = new Servo(RobotMap.INTAKE_FLAP_OUT_ONE); 
-		hopperTwo = new Servo(RobotMap.INTAKE_FLAP_OUT_TWO);
-		flapOut = new DigitalInput(RobotMap.IS_FLAP_OUT); 
+		intake = new Talon(RobotMap.COIL_MOTOR); 
+		hopperOne = new Servo(RobotMap.FLAP_OUT_ONE); 
+		hopperTwo = new Servo(RobotMap.FLAP_OUT_TWO);
+		isCoiled = new DigitalInput(RobotMap.IS_COILED); 
 
 	}
     public void initDefaultCommand() {
@@ -36,31 +36,31 @@ public class Hopper extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void intake(){
-    	intake.set(RobotMap.SUCKER);
+    public void coil(){
+    	intake.set(RobotMap.COIL);
     	
     }
-    public boolean isFlapOut(){
-    	return flapOut.get(); 
+    public boolean isCoiled(){
+    	return isCoiled.get(); 
     }
     public void stop(){
     	intake.set(0.0);
     	
     }
     
-    public void dump(){
+    public void openFlap(){
     	hopperOne.set(1);
     	hopperTwo.set(1); 
     }
     
-    public void retract(){
+    public void closeFlap(){
     	hopperOne.set(0);
     	hopperTwo.set(0); 
     }
     
     public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
-    	SmartDashboard.putBoolean("Flapout", isFlapOut());
+    	SmartDashboard.putBoolean("Coiled", isCoiled());
     	SmartDashboard.putNumber("Servo One", hopperOne.get()); 
     	SmartDashboard.putNumber("Servo Two", hopperTwo.get()); 
     }

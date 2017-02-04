@@ -7,21 +7,21 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class retractHopper extends Command {
+public class flapClose extends Command {
 
-    public retractHopper() {
+    public flapClose() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.box); 
+    	requires(Robot.box) ;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.box.closeFlap(); 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.box.retract();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -51,7 +51,7 @@ public class Climber extends Subsystem {
 	}
 	
 	public boolean motorStall(){
-		return (pdp.getCurrent(RobotMap.PDP_PORT) > 1000);
+		return (pdp.getCurrent(RobotMap.PDP_PORT) > RobotMap.PDP_STALL);
 			
 	}
 	public void updateSmartDashboard(){
