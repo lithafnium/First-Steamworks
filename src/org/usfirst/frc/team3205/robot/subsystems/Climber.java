@@ -22,16 +22,13 @@ public class Climber extends Subsystem {
 	private DigitalInput climbLimit;
 	private PowerDistributionPanel pdp; 
 	private Encoder climbDistance; 
-
-
-
     
 	public Climber(){
 		one = new Talon(RobotMap.CLIMBER_ONE); 
 		two = new Talon(RobotMap.CLIMBER_TWO); 
 		climbLimit = new DigitalInput(RobotMap.IS_UP); 
-		pdp = new PowerDistributionPanel(RobotMap.CLIMBER_ONE); 
-		climbDistance = new Encoder(5, 6, false, Encoder.EncodingType.k4X); 
+		pdp = new PowerDistributionPanel(); 
+		climbDistance = new Encoder(4, 5, false, Encoder.EncodingType.k4X); 
 
 	}
 	public void initDefaultCommand() {
@@ -59,16 +56,17 @@ public class Climber extends Subsystem {
 		two.set(0.0); 
 	}
 	public double getCurrent(){
-		return pdp.getCurrent(RobotMap.PDP_PORT); 
+		//return pdp.getCurrent(RobotMap.PDP_PORT); 
+		return 0.0;
 	}
 	
 	public boolean motorStall(){
-		return (pdp.getCurrent(RobotMap.PDP_PORT) > RobotMap.PDP_STALL);
-			
+		//return (pdp.getCurrent(RobotMap.PDP_PORT) > RobotMap.PDP_STALL);
+		return true; 
 	}
 	public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
-    	SmartDashboard.putBoolean("Hit climb", climbingLimit());
+    	SmartDashboard.putBoolean("Hit climb", true);
     	SmartDashboard.putNumber("Current", getCurrent());
 
     	

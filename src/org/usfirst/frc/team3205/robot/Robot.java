@@ -1,6 +1,12 @@
 
 package org.usfirst.frc.team3205.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -11,6 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
+
+import edu.wpi.first.wpilibj.vision.CameraServer;
 
 import org.usfirst.frc.team3205.robot.subsystems.Climber;
 //import org.usfirst.frc.team3205.robot.commands.ExampleCommand;
@@ -30,12 +38,13 @@ import org.usfirst.frc.team3205.robot.subsystems.Vision;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-	
-	public static final DriveTrain driveTrain = new DriveTrain(); 
-	public static final Gear gear = new Gear(); 
-	public static final Climber climb = new Climber(); 
-	public static final Hopper box = new Hopper(); 
-	public static final Vision vision = new Vision(); 
+
+	public static DriveTrain driveTrain ; 
+	public static Gear gear; 
+	public static Climber climb; 
+	public static Hopper box; 
+	public static Vision vision;  
+	Thread visionThread; 
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -47,11 +56,17 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		driveTrain = new DriveTrain();
+		gear = new Gear(); 
+		climb = new Climber(); 
+		box = new Hopper(); 
+		vision = new Vision();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-		updateSmartDashboard(); 
+		//SmartDashboard.putData("Auto mode", chooser);
 		
+		updateSmartDashboard(); 
+
 	}
 
 	/**
@@ -82,6 +97,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		updateSmartDashboard(); 
 		autonomousCommand = chooser.getSelected();
 
 		/*
@@ -101,6 +117,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		updateSmartDashboard();
+
 		Scheduler.getInstance().run();
 	}
 
@@ -110,6 +128,8 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		updateSmartDashboard();
+
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
@@ -119,6 +139,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		updateSmartDashboard();
+
 		Scheduler.getInstance().run();
 	}
 
@@ -130,10 +152,10 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 	}
 	public void updateSmartDashboard(){
-		box.updateSmartDashboard();
-		gear.updateSmartDashboard();
-		climb.updateSmartDashboard(); 
-		driveTrain.updateSmartDashboard();
-		
+				box.updateSmartDashboard();
+				gear.updateSmartDashboard();
+				climb.updateSmartDashboard(); 
+				driveTrain.updateSmartDashboard();
+
 	}
 }

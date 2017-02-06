@@ -42,7 +42,7 @@ public class Gear extends Subsystem {
     
     public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
-    	SmartDashboard.putBoolean("Drive Encoder Two", isGearIn());
+    	//SmartDashboard.putBoolean("Is Gear in", isGearIn());
     }
 }
 

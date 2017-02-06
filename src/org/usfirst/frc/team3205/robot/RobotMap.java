@@ -22,48 +22,48 @@ public class RobotMap {
 	public static final double CLIMB_SPEED = 0.6; 
 	
 	//LIMIT SWITCHES 
-	public static final int IS_GEAR_IN = 5; 
-	public static final int IS_UP = 9; 
-	public static final int IS_COILED = 10; 
+	public static final int IS_GEAR_IN = 0; 
+	public static final int IS_UP = 1; 
+	public static final int IS_COILED = 2; 
 
 	//LINEAR ACTUATORS
-	public static final int PUSH_EM_OUT = 6; // push gear out port
+	public static final int PUSH_EM_OUT = 3; // push gear out port
 
 	//ULTRASONIC SENSORS 
-	public static final int ULTRA_TRIGGER_INPUT_ONE = 14; 
-	public static final int ULTRA_PULSE_OUTPUT_ONE = 15; 
+	public static final int ULTRA_TRIGGER_INPUT_ONE = 4; 
+	public static final int ULTRA_PULSE_OUTPUT_ONE = 5; 
 	
-	public static final int ULTRA_TRIGGER_INPUT_TWO = 18; 
-	public static final int ULTRA_PULSE_OUTPUT_TWO = 20; 
+	public static final int ULTRA_TRIGGER_INPUT_TWO = 6; 
+	public static final int ULTRA_PULSE_OUTPUT_TWO = 7; 
 
 
 	// MOTOR PORTS 
-	public static final int TOP_LEFT_DRIVETRAIN_MOTOR = 0; 
-	public static final int BOTTOM_LEFT_DRIVETRAIN_MOTOR = 1; 
+	public static final int TOP_LEFT_DRIVETRAIN_MOTOR = 8; 
+	public static final int BOTTOM_LEFT_DRIVETRAIN_MOTOR = 9; 
 
-	public static final int TOP_RIGHT_DRIVETRAIN_MOTOR = 40; 
-	public static final int BOTTOM_RIGHT_DRIVETRAIN_MOTOR = 60; 
+	public static final int TOP_RIGHT_DRIVETRAIN_MOTOR = 10; 
+	public static final int BOTTOM_RIGHT_DRIVETRAIN_MOTOR = 11; 
 
 	
-	public static final int CLIMBER_ONE = 2; 
-	public static final int CLIMBER_TWO = 3; 
+	public static final int CLIMBER_ONE = 12; 
+	public static final int CLIMBER_TWO = 13; 
 	
-	public static final int COIL_MOTOR = 7; 
-	public static final int FLAP_OUT_ONE = 8; 
-	public static final int FLAP_OUT_TWO = 11; 
+	public static final int COIL_MOTOR = 14; 
+	public static final int FLAP_OUT_ONE = 15; 
+	public static final int FLAP_OUT_TWO = 16; 
 	
 	// VISION 
-	public static final int IMG_WIDTH = 320;
-    public static final int IMG_HEIGHT = 240;
+	public static final int IMG_WIDTH = 640;
+    public static final int IMG_HEIGHT = 480;
     public static final double FOV_DEG = 34.3;
     public static final double RECT_WIDTH = 3.0;
     public static final double RECT_HEIGHT = 5.0;
     public static final double RECT_DISTANCE = 6.25;
     public static final double PEG_LENGTH = 5.0; 
     //DRIVEBASE stuff 
-    public static final int GYRO_PORT = 50; 
+   // public static final int GYRO_PORT = 4; 
     
     //MISC 
-    public static final int PDP_PORT = 30; // pdp for the climber 
+    public static final int PDP_PORT = 18; // pdp for the climber 
     public static final double PDP_STALL = 20.0;  // if the motor is stalling 
 }

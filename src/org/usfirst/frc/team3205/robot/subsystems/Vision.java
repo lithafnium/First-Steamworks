@@ -25,7 +25,10 @@ import edu.wpi.first.wpilibj.vision.VisionThread;
  *
  */
 public class Vision extends Subsystem {
-	CameraServer serverOne; 
+	Thread visionThread;
+
+	CameraServer serverOne;
+	UsbCamera camera; 
 	Pipeline pipeLine; 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -41,7 +44,7 @@ public class Vision extends Subsystem {
 	//private VisionThread visionThread;
 	//private double centerX = 0.0;
 	public Mat mat; 
-	private final Object imgLock = new Object();
+	//private final Object imgLock = new Object();
 	public Vision(){
 		mat = new Mat(); 
 		pipeLine = new Pipeline(); 
@@ -54,25 +57,73 @@ public class Vision extends Subsystem {
 		//setDefaultCommand(new MySpecialCommand());
 		setDefaultCommand(new visionStartCameraStream()); 
 	}
-//	public void calculate(){
-//		//double centerX;
-//		synchronized (imgLock) {
-//			centerX = this.centerX;
-//		}
-//		//double turn = centerX - (RobotMap.IMG_WIDTH / 2);
-//	}
+
 	public void cameraInit(){
 		serverOne = CameraServer.getInstance();
+////		//serverOne.startAutomaticCapture();
+////		//serverOne.startAutomaticCapture(0);
+		camera = serverOne.startAutomaticCapture();
+		//camera.setResolution(320, 240);
+		camera.setBrightness(-50);
+		camera.setExposureManual(20);
+
+//		//CvSink cvSink = CameraServer.getInstance().getVideo();
+//		CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
+//		Mat mat = new Mat();
+//		outputStream.putFrame(mat);
+
+
+
+	//	camera.setBrightness(-50); 
+				//camera.setExposureManual(100); 
+
+//		visionThread = new Thread(() -> {
+//			// Get the UsbCamera from CameraServer
+//			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+//			// Set the resolution
+//			camera.setResolution(640, 480);
+//
+//			// Get a CvSink. This will capture Mats from the camera
+//			CvSink cvSink = CameraServer.getInstance().getVideo();
+//			// Setup a CvSource. This will send images back to the Dashboard
+//			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
+//
+//			// Mats are very memory expensive. Lets reuse this Mat.
+//			Mat mat = new Mat();
+//
+//			// This cannot be 'true'. The program will never exit if it is. This
+//			// lets the robot stop this thread when restarting robot code or
+//			// deploying.
+//			while (!Thread.interrupted()) {
+//				// Tell the CvSink to grab a frame from the camera and put it
+//				// in the source mat.  If there is an error notify the output.
+//				if (cvSink.grabFrame(mat) == 0) {
+//					// Send the output the error.
+//					outputStream.notifyError(cvSink.getError());
+//					// skip the rest of the current iteration
+//					continue;
+//				}
+//				// Put a rectangle on the image
+//				Imgproc.rectangle(mat, new Point(100, 100), new Point(400, 400),
+//						new Scalar(255, 255, 255), 5);
+//				// Give the output stream a new image to display
+//				outputStream.putFrame(mat);
+//			}
+//		});
+//		visionThread.setDaemon(true);
+//		visionThread.start();
+					
+
+
 	}
 	public void cameraStream(){
 	
 		
 
-		UsbCamera camera = serverOne.startAutomaticCapture("cam0", 0);
 		// Set the resolution
-		camera.setResolution(RobotMap.IMG_WIDTH, RobotMap.IMG_HEIGHT);
-		camera.setBrightness(50);
-		camera.setExposureManual(50); 
+		
+		//camera.setBrightness(50);
+		//camera.setExposureManual(50); 
 
 		// Get a CvSink. This will capture Mats from the camera	
 		

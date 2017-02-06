@@ -45,12 +45,12 @@ public class DriveTrain extends Subsystem {
 		one = new Encoder(0,1, false, Encoder.EncodingType.k4X);
 		two = new Encoder(2,3, false, Encoder.EncodingType.k4X);
 		
-		gyroSensor = new AnalogGyro(RobotMap.GYRO_PORT); 
+		//gyroSensor = new AnalogGyro(RobotMap.GYRO_PORT); 
 	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new drive()); 
+		//setDefaultCommand(new drive()); 
 	}
 	public void driveNow(Joystick left, Joystick right){
 		robotDrive.tankDrive(left, right); 
@@ -109,9 +109,9 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("Drive Encoder One", getEncoderOne());
     	SmartDashboard.putNumber("Drive Encoder Two", getEncoderTwo());
     	
-    	SmartDashboard.putNumber("Angle", getAngle()); 
+    	//SmartDashboard.putNumber("Angle", getAngle()); 
 
 	}
-	
+	//
 	
 }
