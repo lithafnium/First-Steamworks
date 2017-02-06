@@ -42,8 +42,8 @@ public class DriveTrain extends Subsystem {
 		ultraOne = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_ONE, RobotMap.ULTRA_TRIGGER_INPUT_ONE); 
 		ultraTwo = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_TWO, RobotMap.ULTRA_TRIGGER_INPUT_TWO); 
 		
-		one = new Encoder(0,1, false, Encoder.EncodingType.k4X);
-		two = new Encoder(2,3, false, Encoder.EncodingType.k4X);
+		one = new Encoder(19,20, false, Encoder.EncodingType.k4X);
+		two = new Encoder(21,22, false, Encoder.EncodingType.k4X);
 		
 		//gyroSensor = new AnalogGyro(RobotMap.GYRO_PORT); 
 	}

@@ -28,7 +28,7 @@ public class Climber extends Subsystem {
 		two = new Talon(RobotMap.CLIMBER_TWO); 
 		climbLimit = new DigitalInput(RobotMap.IS_UP); 
 		pdp = new PowerDistributionPanel(); 
-		climbDistance = new Encoder(4, 5, false, Encoder.EncodingType.k4X); 
+		climbDistance = new Encoder(23, 24, false, Encoder.EncodingType.k4X); 
 
 	}
 	public void initDefaultCommand() {

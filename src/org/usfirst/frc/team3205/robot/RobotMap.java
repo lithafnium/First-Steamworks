@@ -49,8 +49,8 @@ public class RobotMap {
 	public static final int CLIMBER_TWO = 13; 
 	
 	public static final int COIL_MOTOR = 14; 
-	public static final int FLAP_OUT_ONE = 15; 
-	public static final int FLAP_OUT_TWO = 16; 
+	public static final int FLAP_OUT_ONE = 0; 
+	public static final int FLAP_OUT_TWO = 1; 
 	
 	// VISION 
 	public static final int IMG_WIDTH = 640;

@@ -57,12 +57,19 @@ public class Hopper extends Subsystem {
     	hopperOne.set(0);
     	hopperTwo.set(0); 
     }
+    public double getServoOne(){
+    	return hopperOne.getPosition(); 
+    }
+    public double getServoTwo(){
+    	return hopperTwo.getPosition(); 
+    }
+    
     
     public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
     	SmartDashboard.putBoolean("Coiled", isCoiled());
-    	SmartDashboard.putNumber("Servo One", hopperOne.get()); 
-    	SmartDashboard.putNumber("Servo Two", hopperTwo.get()); 
+    	SmartDashboard.putNumber("Servo One", getServoOne()); 
+    	SmartDashboard.putNumber("Servo Two", getServoTwo()); 
     }
     
 }
