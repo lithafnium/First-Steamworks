@@ -19,8 +19,7 @@ public class visionGetImage extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	 Robot.vision.processImages(); 
-//    	double distance = Robot.vision.moveToPeg(); 
-//    	double turnAngle = Robot.vision.findAngleToTurn(); 
+
     }
 
     // Called repeatedly when this Command is scheduled to run

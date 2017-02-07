@@ -65,30 +65,9 @@ public class Vision extends Subsystem {
 		camera.setBrightness(-50);
 		camera.setExposureManual(21);
 
-//		//CvSink cvSink = CameraServer.getInstance().getVideo();
-//		CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
-//		Mat mat = new Mat();
-//		outputStream.putFrame(mat);
-
-
-
-
-					
-
 
 	}
-	public void cameraStream(){
 	
-		
-
-		// Set the resolution
-		
-		//camera.setBrightness(50);
-		//camera.setExposureManual(50); 
-
-		// Get a CvSink. This will capture Mats from the camera	
-		
-	}
 	public void processImages(){
 		CvSink cvSink = CameraServer.getInstance().getVideo();
 		// Setup a CvSource. This will send images back to the Dashboard
