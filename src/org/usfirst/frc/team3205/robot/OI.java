@@ -6,6 +6,7 @@ import org.usfirst.frc.team3205.robot.commands.flapOpen;
 import org.usfirst.frc.team3205.robot.commands.hopperCoil;
 import org.usfirst.frc.team3205.robot.commands.pushGearIn;
 import org.usfirst.frc.team3205.robot.commands.pushGearOut;
+import org.usfirst.frc.team3205.robot.commands.visionSwitchCameras;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -104,5 +105,6 @@ public class OI {
 		c7.whileHeld(new pushGearIn()); 
 		c4.whileHeld(new hopperCoil());
 		c3.whileHeld(new climber());
+		c1.whileActive(new visionSwitchCameras());
 	}
 }

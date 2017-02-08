@@ -33,13 +33,13 @@ public class Vision extends Subsystem {
 	// here. Call these from Commands.
 	public double smallerHypot = 0.0; 
 	public double altitude = 0.0; 
-	
-    
-   // private static final double OPTIMAL_DEG = 60.0; //change later; 
-    public boolean leftOfPeg = false; 
-    
-    private ArrayList<Rect> contours; 
-    //TreeMap<Rect, MatofPoint> contours; 
+
+
+	// private static final double OPTIMAL_DEG = 60.0; //change later; 
+	public boolean leftOfPeg = false; 
+	public boolean camSwitch = false; 
+	private ArrayList<Rect> contours; 
+	//TreeMap<Rect, MatofPoint> contours; 
 	//private VisionThread visionThread;
 	//private double centerX = 0.0;
 	public Mat mat; 
@@ -48,7 +48,7 @@ public class Vision extends Subsystem {
 		mat = new Mat(); 
 		pipeLine = new Pipeline(); 
 		contours = new ArrayList<>(); 
-		
+
 	}
 
 	public void initDefaultCommand() {
@@ -58,16 +58,52 @@ public class Vision extends Subsystem {
 	}
 
 	public void cameraInit(){
-		serverOne = CameraServer.getInstance();
-;
-		camera = serverOne.startAutomaticCapture();
-		//camera.setResolution(320, 240);
-		camera.setBrightness(-50);
-		camera.setExposureManual(21);
+		//		serverOne = CameraServer.getInstance();
+		//;
+		//		camera = serverOne.startAutomaticCapture();
+		//		//camera.setResolution(320, 240);
+		//		camera.setBrightness(-50);
+		//		camera.setExposureManual(21);
+		Thread t = new Thread(() -> {
 
+			boolean allowCam1 = false;
+
+			UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(0);
+			camera1.setResolution(320, 240);
+			camera1.setBrightness(-50); 
+			camera1.setExposureManual(21); 
+			camera1.setFPS(30);
+			UsbCamera camera2 = CameraServer.getInstance().startAutomaticCapture(1);
+			camera2.setResolution(320, 240);
+			camera2.setFPS(30);
+			camera2.setBrightness(-50); 
+			camera2.setExposureManual(21); 
+
+			CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
+			CvSink cvSink2 = CameraServer.getInstance().getVideo(camera2);
+			CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 320, 240);
+
+			Mat image = new Mat();
+
+			while(!Thread.interrupted()) {
+				if(camSwitch){
+					cvSink2.setEnabled(false);
+					cvSink1.setEnabled(true);
+					cvSink1.grabFrame(image);
+				} else if(!camSwitch){
+					cvSink1.setEnabled(false);
+					cvSink2.setEnabled(true);
+					cvSink2.grabFrame(image);     
+				}
+
+				outputStream.putFrame(image);
+			}
+
+		});
+		t.start();
 
 	}
-	
+
 	public void processImages(){
 		CvSink cvSink = CameraServer.getInstance().getVideo();
 		// Setup a CvSource. This will send images back to the Dashboard
@@ -79,28 +115,28 @@ public class Vision extends Subsystem {
 
 		}
 		else{
-			
+
 			// Give the output stream a new image to display
 			// filters the image 
 			pipeLine.process(mat);
-			
+
 			outputStream.putFrame(mat);
 
 			// sorts contours by size
-			
-			
-			
+
+
+
 		}
 	}
 	public void findAndSort(){
 		for(int i = 0; i < pipeLine.filterContoursOutput().size(); i++){
-            Rect r = Imgproc.boundingRect(pipeLine.filterContoursOutput().get(i));
-            contours.add(r); 
-            //pipeLine.filterContoursOutput().get(i).size(); 
+			Rect r = Imgproc.boundingRect(pipeLine.filterContoursOutput().get(i));
+			contours.add(r); 
+			//pipeLine.filterContoursOutput().get(i).size(); 
 
 		}
 		Collections.sort(contours, new compareRectSize());
- 
+
 	}
 	public void resetContours(){
 		contours = new ArrayList<Rect>(); 
@@ -121,27 +157,27 @@ public class Vision extends Subsystem {
 	public double findAngleToTurn(){
 		altitude = findAltitude(smallerHypot);
 		return getTheta(smallerHypot, altitude, RobotMap.TAPE_DISTANCEBETWEEN / 2); 
-		
+
 	} 
 	// finds the distance from which you move towards the peg (doesn't move right to it, 
 	// moves at the point where it meets the peg if the peg was extended further 
 	public double moveToPeg(){
 		if(contours.size() >= 2){
-			
+
 			double sideOne = distanceToTarget(contours.get(0)); // distance to one contour
 			double sideTwo = distanceToTarget(contours.get(1)); // distance to the other 
-			
+
 			double largerSide = sideOne > sideTwo ? sideOne : sideTwo; 
-			
+
 			double area = area(sideOne, sideTwo); // area of the trignale formed 
 			double height = calculateHeight(area);  // height of the triangle formed 
-			
+
 			// finds the base of the right triangle formed with the larger distnace as the hypot
 			double base =findBase(largerSide, height);  
-			
+
 			// finds the length of the smaller hypotenuse, the end of which meets the end of the peg 
 			smallerHypot =  findSmallHypot(largerSide, base); 
-			
+
 			// calculates the distance the robot has to move 
 			double distance =  calculateDistanceToPeg(largerSide, smallerHypot); 
 			contours = new ArrayList<Rect>(); // resets the arrayList 
@@ -167,7 +203,7 @@ public class Vision extends Subsystem {
 	public double findBase(double hypot, double height){
 		return Math.sqrt(Math.pow(hypot, 2) - Math.pow(height, 2)); 
 	}
-	
+
 	// finds the distance from which the peg if extended hits the side 
 	public double findSmallHypot(double largerHypot, double largerBase){
 		return (2/largerBase) * largerHypot; 
@@ -180,48 +216,48 @@ public class Vision extends Subsystem {
 	public double findAltitude(double hypot){
 		return Math.pow(hypot,  2) - Math.pow(RobotMap.TAPE_WIDTH, 2); 
 	}
-	
+
 	// approximate distance to the target using apparent size
 	public double distanceToTarget(Rect rectangle) {
-        int height = rectangle.height;
-        double fovRad = RobotMap.FOV_DEG * Math.PI / 180;
-        double ratio = height / RobotMap.IMG_HEIGHT;
-        double theta = fovRad * ratio;
-        double distance = RobotMap.TAPE_HEIGHT / theta;
-        return distance;
-    }
-    // gets the angle between looking at two contours --> the rectangles 
-    public double getTheta(double dist1, double dist2, double dist3) {
-        double theta = Math.acos((dist1 * dist1 + dist2 * dist2- dist3 * dist3) / (2 * dist1 * dist2));
-        return theta;
-    }
-    // get angle of offset of robot relative to contour, where 0 is facing it directly
-    public double angleToPerpendicular() { // if findAngleToTurn() doesn't work
-    	Rect rectangle = contours.get(0); 
-    	double directWidth = rectangle.height * RobotMap.TAPE_WIDTH / RobotMap.TAPE_HEIGHT;
-    	double ratio = rectangle.width / directWidth;
-    	return 90 - ratio * 90;
-    }
-    
-    public double turnToPegFromPerpendicular(){
-    	Rect smallerRect = contours.get(1); 
-    	double distanceToContour = distanceToTarget(smallerRect); 
-    	double perpendicularDistance = (Robot.driveTrain.getDistanceOne() + Robot.driveTrain.getDistanceTwo())/2;
-    	
-    	double base = Math.sqrt(Math.pow(distanceToContour, 2) - Math.pow(perpendicularDistance, 2)); 
-    	
-    	return Math.acos(perpendicularDistance / distanceToContour); 
-    }
-    // sorts the rectangles by size --> size of the contours 
-    class compareRectSize implements Comparator<Rect>{
+		int height = rectangle.height;
+		double fovRad = RobotMap.FOV_DEG * Math.PI / 180;
+		double ratio = height / RobotMap.IMG_HEIGHT;
+		double theta = fovRad * ratio;
+		double distance = RobotMap.TAPE_HEIGHT / theta;
+		return distance;
+	}
+	// gets the angle between looking at two contours --> the rectangles 
+	public double getTheta(double dist1, double dist2, double dist3) {
+		double theta = Math.acos((dist1 * dist1 + dist2 * dist2- dist3 * dist3) / (2 * dist1 * dist2));
+		return theta;
+	}
+	// get angle of offset of robot relative to contour, where 0 is facing it directly
+	public double angleToPerpendicular() { // if findAngleToTurn() doesn't work
+		Rect rectangle = contours.get(0); 
+		double directWidth = rectangle.height * RobotMap.TAPE_WIDTH / RobotMap.TAPE_HEIGHT;
+		double ratio = rectangle.width / directWidth;
+		return 90 - ratio * 90;
+	}
+
+	public double turnToPegFromPerpendicular(){
+		Rect smallerRect = contours.get(1); 
+		double distanceToContour = distanceToTarget(smallerRect); 
+		double perpendicularDistance = (Robot.driveTrain.getDistanceOne() + Robot.driveTrain.getDistanceTwo())/2;
+
+		double base = Math.sqrt(Math.pow(distanceToContour, 2) - Math.pow(perpendicularDistance, 2)); 
+
+		return Math.acos(perpendicularDistance / distanceToContour); 
+	}
+	// sorts the rectangles by size --> size of the contours 
+	class compareRectSize implements Comparator<Rect>{
 
 		@Override
 		public int compare(Rect contourOne, Rect contourTwo) {
 			// TODO Auto-generated method stub
 			return contourTwo.height * contourTwo.width - contourOne.height * contourOne.width; 
 		}
-    	 
-    }
+
+	}
 }
 
 
