@@ -56,9 +56,9 @@ public class RobotMap {
 	public static final int IMG_WIDTH = 640;
     public static final int IMG_HEIGHT = 480;
     public static final double FOV_DEG = 34.3;
-    public static final double RECT_WIDTH = 3.0;
-    public static final double RECT_HEIGHT = 5.0;
-    public static final double RECT_DISTANCE = 6.25;
+    public static final double TAPE_WIDTH = 3.0;
+    public static final double TAPE_HEIGHT = 5.0;
+    public static final double TAPE_DISTANCEBETWEEN = 8.25;
     public static final double PEG_LENGTH = 5.0; 
     //DRIVEBASE stuff 
    // public static final int GYRO_PORT = 4; 

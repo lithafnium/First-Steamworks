@@ -11,6 +11,7 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.core.Rect; 
 //import com.ni.vision.NIVision.Rect;
 
+import org.usfirst.frc.team3205.robot.Robot;
 import org.usfirst.frc.team3205.robot.RobotMap;
 import org.usfirst.frc.team3205.robot.commands.visionStartCameraStream;
 
@@ -37,7 +38,7 @@ public class Vision extends Subsystem {
    // private static final double OPTIMAL_DEG = 60.0; //change later; 
     public boolean leftOfPeg = false; 
     
-    ArrayList<Rect> contours; 
+    private ArrayList<Rect> contours; 
     //TreeMap<Rect, MatofPoint> contours; 
 	//private VisionThread visionThread;
 	//private double centerX = 0.0;
@@ -83,26 +84,34 @@ public class Vision extends Subsystem {
 			// Give the output stream a new image to display
 			// filters the image 
 			pipeLine.process(mat);
-			for(int i = 0; i < pipeLine.filterContoursOutput().size(); i++){
-	            Rect r = Imgproc.boundingRect(pipeLine.filterContoursOutput().get(i));
-	            contours.add(r); 
-	            //pipeLine.filterContoursOutput().get(i).size(); 
-
-			}
+			
 			outputStream.putFrame(mat);
 
 			// sorts contours by size
-			Collections.sort(contours, new compareRectSize());
 			
 			
 			
 		}
 	}
+	public void findAndSort(){
+		for(int i = 0; i < pipeLine.filterContoursOutput().size(); i++){
+            Rect r = Imgproc.boundingRect(pipeLine.filterContoursOutput().get(i));
+            contours.add(r); 
+            //pipeLine.filterContoursOutput().get(i).size(); 
+
+		}
+		Collections.sort(contours, new compareRectSize());
+ 
+	}
+	public void resetContours(){
+		contours = new ArrayList<Rect>(); 
+	}
 	// finds the angle from your original position 
 	public double findAngle(){
 		if(contours.size() >= 2){
-			double angle = getTheta(distanceToTarget(contours.get(0)), distanceToTarget(contours.get(1)), RobotMap.RECT_DISTANCE); 
+			double angle = getTheta(distanceToTarget(contours.get(0)), distanceToTarget(contours.get(1)), RobotMap.TAPE_DISTANCEBETWEEN); 
 			// to the left or right of the peg 
+			// if the larger contour x coordinate is less than the next largest 
 			leftOfPeg = contours.get(0).x < contours.get(1).x ? true : false; 
 			// angle you have to turn to / 2, as you're rotating to the side   
 			return angle/2; 
@@ -112,9 +121,9 @@ public class Vision extends Subsystem {
 	// find the angle to turn once you centered the robot on the peg 
 	public double findAngleToTurn(){
 		altitude = findAltitude(smallerHypot);
-		return getTheta(smallerHypot, altitude, RobotMap.RECT_DISTANCE/2); 
+		return getTheta(smallerHypot, altitude, RobotMap.TAPE_DISTANCEBETWEEN / 2); 
 		
-	}
+	} 
 	// finds the distance from which you move towards the peg (doesn't move right to it, 
 	// moves at the point where it meets the peg if the peg was extended further 
 	public double moveToPeg(){
@@ -139,20 +148,20 @@ public class Vision extends Subsystem {
 			contours = new ArrayList<Rect>(); // resets the arrayList 
 			return distance; 
 		}
-		contours = new ArrayList<Rect>(); // resets the arrayList 
+		//contours = new ArrayList<Rect>(); // resets the arrayList 
 
 		return -1; 
 	}
 	// area of the triangle formed with the tape being the end points, the legs being distances to the tape
 	public double area(double sideOne, double sideTwo){
-		double sideThree = RobotMap.RECT_DISTANCE; 
+		double sideThree = RobotMap.TAPE_DISTANCEBETWEEN; 
 		double s = (sideOne + sideTwo + sideThree)/2; // semiperimeter
 		double area = Math.sqrt(s*(s - sideOne)*(s - sideTwo)*(s - sideThree)); 
 		return area; 
 	}
 	// calculates the height of the triangle before moving 
 	public double calculateHeight(double area){
-		return area * 2 / RobotMap.RECT_DISTANCE; 
+		return area * 2 / RobotMap.TAPE_DISTANCEBETWEEN; 
 	}
 	// finds the base of the right triangle formed, with the hypotenuse being the longer side 
 	// of the triangle formed by the distances from the tape
@@ -170,23 +179,39 @@ public class Vision extends Subsystem {
 	}
 	// use only when you moved the robot to the right place - in front of the peg 
 	public double findAltitude(double hypot){
-		return Math.pow(hypot,  2) - Math.pow(3, 2); 
+		return Math.pow(hypot,  2) - Math.pow(RobotMap.TAPE_WIDTH, 2); 
 	}
 	
-	// distance to the target using apparent size 
+	// approximate distance to the target using apparent size
 	public double distanceToTarget(Rect rectangle) {
         int height = rectangle.height;
         double fovRad = RobotMap.FOV_DEG * Math.PI / 180;
         double ratio = height / RobotMap.IMG_HEIGHT;
         double theta = fovRad * ratio;
-        double distance = RobotMap.RECT_HEIGHT / theta;
+        double distance = RobotMap.TAPE_HEIGHT / theta;
         return distance;
     }
     // gets the angle between looking at two contours --> the rectangles 
     public double getTheta(double dist1, double dist2, double dist3) {
-      
         double theta = Math.acos((dist1 * dist1 + dist2 * dist2- dist3 * dist3) / (2 * dist1 * dist2));
         return theta;
+    }
+    // get angle of offset of robot relative to contour, where 0 is facing it directly
+    public double angleToPerpendicular() { // if findAngleToTurn() doesn't work
+    	Rect rectangle = contours.get(0); 
+    	double directWidth = rectangle.height * RobotMap.TAPE_WIDTH / RobotMap.TAPE_HEIGHT;
+    	double ratio = rectangle.width / directWidth;
+    	return 90 - ratio * 90;
+    }
+    
+    public double turnToPegFromPerpendicular(){
+    	Rect smallerRect = contours.get(1); 
+    	double distanceToContour = distanceToTarget(smallerRect); 
+    	double perpendicularDistance = (Robot.driveTrain.getDistanceOne() + Robot.driveTrain.getDistanceTwo())/2;
+    	
+    	double base = Math.sqrt(Math.pow(distanceToContour, 2) - Math.pow(perpendicularDistance, 2)); 
+    	
+    	return Math.acos(perpendicularDistance / distanceToContour); 
     }
     // sorts the rectangles by size --> size of the contours 
     class compareRectSize implements Comparator<Rect>{
@@ -196,7 +221,7 @@ public class Vision extends Subsystem {
 			// TODO Auto-generated method stub
 			return contourTwo.height * contourTwo.width - contourOne.height * contourOne.width; 
 		}
-    	
+    	 
     }
 }
 

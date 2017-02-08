@@ -25,6 +25,7 @@ public class visionAutonomous extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addSequential(new visionGetImage()); 
+    	addSequential(new visionTurnToWall()); 
     	addSequential(new visionMoveAngle()); 
     	addSequential(new visionDriveTowardsCenter()); 
     	addSequential(new visionTurnToPeg()); 

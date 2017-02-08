@@ -19,7 +19,8 @@ public class visionMoveAngle extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveTrain.calibrateGyro();
-    	angle = Robot.vision.findAngle();
+    	//angle = Robot.vision.findAngle();
+    	angle = Robot.vision.turnToPegFromPerpendicular(); 
     	if(Robot.vision.leftOfPeg){
         	Robot.driveTrain.driveCertainAmounts(.5, -.5);
 

@@ -37,6 +37,7 @@ public class visionMoveToPeg extends Command {
     	if(Robot.driveTrain.getEncoderOne() - start >= distanceToPeg){
     		if(Robot.gear.isGearIn()){
     			Robot.driveTrain.stop(); 
+    			Robot.vision.resetContours();
     			done = true; 
     		}
     	}
