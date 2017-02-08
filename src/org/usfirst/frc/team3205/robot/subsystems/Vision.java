@@ -59,8 +59,7 @@ public class Vision extends Subsystem {
 
 	public void cameraInit(){
 		serverOne = CameraServer.getInstance();
-////		//serverOne.startAutomaticCapture();
-////		//serverOne.startAutomaticCapture(0);
+;
 		camera = serverOne.startAutomaticCapture();
 		//camera.setResolution(320, 240);
 		camera.setBrightness(-50);

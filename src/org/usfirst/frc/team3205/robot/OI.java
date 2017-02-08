@@ -1,5 +1,12 @@
 package org.usfirst.frc.team3205.robot;
 
+import org.usfirst.frc.team3205.robot.commands.climber;
+import org.usfirst.frc.team3205.robot.commands.flapClose;
+import org.usfirst.frc.team3205.robot.commands.flapOpen;
+import org.usfirst.frc.team3205.robot.commands.hopperCoil;
+import org.usfirst.frc.team3205.robot.commands.pushGearIn;
+import org.usfirst.frc.team3205.robot.commands.pushGearOut;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -89,4 +96,13 @@ public class OI {
 		Button x8 = new JoystickButton(xbox, 8);
 		Button x9 = new JoystickButton(xbox, 9);
 		Button x10 = new JoystickButton(xbox, 10);
+		
+	public OI(){
+		c6.whileHeld(new flapOpen());
+		c8.whileHeld(new flapClose()); 
+		c5.whileHeld(new pushGearOut());
+		c7.whileHeld(new pushGearIn()); 
+		c4.whileHeld(new hopperCoil());
+		c3.whileHeld(new climber());
+	}
 }

@@ -20,7 +20,7 @@ public class visionTurnToWall extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveTrain.calibrateGyro();
-    	Robot.driveTrain.calibrateGyro();
+    	//Robot.driveTrain.calibrateGyro();
     	//angle = Robot.vision.findAngle();
     	angle = Robot.vision.angleToPerpendicular(); 
     	if(Robot.vision.leftOfPeg){

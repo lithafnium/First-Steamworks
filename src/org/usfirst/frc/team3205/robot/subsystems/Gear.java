@@ -39,7 +39,9 @@ public class Gear extends Subsystem {
     public void retract(){
     	gearOut.set(0);
     }
-    
+    public double getAngle(){
+    	return gearOut.get(); 
+    }
     public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
     	SmartDashboard.putBoolean("Is Gear in", isGearIn());
