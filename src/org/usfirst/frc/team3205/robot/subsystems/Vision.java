@@ -66,7 +66,6 @@ public class Vision extends Subsystem {
 		//		camera.setExposureManual(21);
 		Thread t = new Thread(() -> {
 
-			boolean allowCam1 = false;
 
 			UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(0);
 			camera1.setResolution(320, 240);
