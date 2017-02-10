@@ -105,6 +105,12 @@ public class OI {
 		c7.whileHeld(new pushGearIn()); 
 		c4.whileHeld(new hopperCoil());
 		c3.whileHeld(new climber());
-		c1.whileActive(new visionSwitchCameras());
+		//c1.toggleWhenPressed(new visionSwitchCameras());
+		c1.whenActive(new visionSwitchCameras());
+		c2.whenActive(new visionSwitchCameras());
+
+//		r1.whenPressed(new visionSwitchCameras());
+//		l1.whenPressed(new visionSwitchCameras());
+
 	}
 }

@@ -39,11 +39,11 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 
-	public static DriveTrain driveTrain ; 
-	public static Gear gear; 
-	public static Climber climb; 
-	public static Hopper box; 
-	public static Vision vision;  
+	public static DriveTrain driveTrain;
+	public static Gear gear;
+	public static Climber climb;
+	public static Hopper box;
+	public static Vision vision;
 	Thread visionThread; 
 
 	Command autonomousCommand;
@@ -55,16 +55,17 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		driveTrain = new DriveTrain();
 		gear = new Gear(); 
 		climb = new Climber(); 
 		box = new Hopper(); 
 		vision = new Vision();
+		oi = new OI();
+				
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);
-		
+
 		updateSmartDashboard(); 
 
 	}
@@ -152,10 +153,11 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 	}
 	public void updateSmartDashboard(){
-				box.updateSmartDashboard();
-				gear.updateSmartDashboard();
-				climb.updateSmartDashboard(); 
-				driveTrain.updateSmartDashboard();
+		box.updateSmartDashboard();
+		gear.updateSmartDashboard();
+		climb.updateSmartDashboard(); 
+		driveTrain.updateSmartDashboard();
+		vision.updateSmartDashboard();
 
 	}
 }

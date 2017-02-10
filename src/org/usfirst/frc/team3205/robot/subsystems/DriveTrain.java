@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3205.robot.subsystems;
 
+import org.usfirst.frc.team3205.robot.Robot;
 import org.usfirst.frc.team3205.robot.RobotMap;
 import org.usfirst.frc.team3205.robot.commands.drive;
 
@@ -30,9 +31,9 @@ public class DriveTrain extends Subsystem {
 	RobotDrive robotDrive; 
 	
 	public DriveTrain(){
-		topLeft = new Talon(RobotMap.TOP_LEFT_DRIVETRAIN_MOTOR); 
+		topLeft = new Spark(RobotMap.TOP_LEFT_DRIVETRAIN_MOTOR); 
 		topRight = new Talon(RobotMap.TOP_RIGHT_DRIVETRAIN_MOTOR); 
-		bottomLeft = new Talon(RobotMap.BOTTOM_LEFT_DRIVETRAIN_MOTOR); 
+		bottomLeft = new Spark(RobotMap.BOTTOM_LEFT_DRIVETRAIN_MOTOR); 
 		bottomRight = new Talon(RobotMap.BOTTOM_RIGHT_DRIVETRAIN_MOTOR);
 		
 		
@@ -108,6 +109,7 @@ public class DriveTrain extends Subsystem {
 		
 		SmartDashboard.putNumber("Drive Encoder One", getEncoderOne());
     	SmartDashboard.putNumber("Drive Encoder Two", getEncoderTwo());
+    	
     	
     	//SmartDashboard.putNumber("Angle", getAngle()); 
 

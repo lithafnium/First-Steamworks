@@ -20,6 +20,7 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -48,13 +49,56 @@ public class Vision extends Subsystem {
 		mat = new Mat(); 
 		pipeLine = new Pipeline(); 
 		contours = new ArrayList<>(); 
+		
+		Thread t = new Thread(() -> {
+
+
+			UsbCamera camera1 = new UsbCamera("cam0", 0); //CameraServer.getInstance().startAutomaticCapture(0);
+			camera1.setResolution(320, 240);
+//			camera1.setBrightness(-50); 
+//			camera1.setExposureManual(21); 
+			camera1.setFPS(30);
+			UsbCamera camera2 = new UsbCamera("cam1", 1); //CameraServer.getInstance().startAutomaticCapture(1);
+			camera2.setResolution(320, 240);
+			camera2.setFPS(30);
+//			camera2.setBrightness(-50); 
+//			camera2.setExposureManual(21); 
+
+			CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
+			//CvSink cvSink2 = CameraServer.getInstance().getVideo(camera2);
+			CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 320, 240);
+
+			Mat image = new Mat();
+
+			while(!Thread.interrupted()) {
+				cvSink1.grabFrame(image); 
+				if(camSwitch){
+//					cvSink2.setEnabled(false);
+//					cvSink1.setEnabled(true);
+//					cvSink1.grabFrame(image);
+					cvSink1.setSource(camera1);
+				} else if(!camSwitch){
+					cvSink1.setSource(camera2); 
+//					cvSink1.setEnabled(false);
+//					cvSink2.setEnabled(true);
+//					cvSink2.grabFrame(image);     
+				}
+
+				outputStream.putFrame(image);
+			}
+
+		});
+		t.start();
 
 	}
-
+//	public void switchCameras(){
+//		camSwitch = !camSwitch; 
+//		
+//	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		//setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new visionStartCameraStream()); 
+		//setDefaultCommand(new visionStartCameraStream()); 
 	}
 
 	public void cameraInit(){
@@ -64,42 +108,7 @@ public class Vision extends Subsystem {
 		//		//camera.setResolution(320, 240);
 		//		camera.setBrightness(-50);
 		//		camera.setExposureManual(21);
-		Thread t = new Thread(() -> {
-
-
-			UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(0);
-			camera1.setResolution(320, 240);
-			camera1.setBrightness(-50); 
-			camera1.setExposureManual(21); 
-			camera1.setFPS(30);
-			UsbCamera camera2 = CameraServer.getInstance().startAutomaticCapture(1);
-			camera2.setResolution(320, 240);
-			camera2.setFPS(30);
-			camera2.setBrightness(-50); 
-			camera2.setExposureManual(21); 
-
-			CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
-			CvSink cvSink2 = CameraServer.getInstance().getVideo(camera2);
-			CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 320, 240);
-
-			Mat image = new Mat();
-
-			while(!Thread.interrupted()) {
-				if(camSwitch){
-					cvSink2.setEnabled(false);
-					cvSink1.setEnabled(true);
-					cvSink1.grabFrame(image);
-				} else if(!camSwitch){
-					cvSink1.setEnabled(false);
-					cvSink2.setEnabled(true);
-					cvSink2.grabFrame(image);     
-				}
-
-				outputStream.putFrame(image);
-			}
-
-		});
-		t.start();
+		
 
 	}
 
@@ -257,6 +266,14 @@ public class Vision extends Subsystem {
 		}
 
 	}
+	 public void updateSmartDashboard(){
+	    	//SmartDashboard.putNumber("Drive Encoder One", );
+//	    	SmartDashboard.putBoolean("Coiled", isCoiled());
+//	    	SmartDashboard.putNumber("Servo One", getServoOne()); 
+//	    	SmartDashboard.putNumber("Servo Two", getServoTwo()); 
+	    	SmartDashboard.putBoolean("camera Switched", camSwitch); 
+
+	    }
 }
 
 

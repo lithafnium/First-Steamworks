@@ -27,7 +27,7 @@ public class RobotMap {
 	public static final int IS_COILED = 2; 
 
 	//LINEAR ACTUATORS
-	public static final int PUSH_EM_OUT = 3; // push gear out port
+	public static final int PUSH_EM_OUT = 9; // push gear out port
 
 	//ULTRASONIC SENSORS 
 	public static final int ULTRA_TRIGGER_INPUT_ONE = 4; 
@@ -38,19 +38,19 @@ public class RobotMap {
 
 
 	// MOTOR PORTS 
-	public static final int TOP_LEFT_DRIVETRAIN_MOTOR = 8; 
-	public static final int BOTTOM_LEFT_DRIVETRAIN_MOTOR = 9; 
+	public static final int TOP_LEFT_DRIVETRAIN_MOTOR = 2; 
+	public static final int BOTTOM_LEFT_DRIVETRAIN_MOTOR = 3; 
 
-	public static final int TOP_RIGHT_DRIVETRAIN_MOTOR = 10; 
-	public static final int BOTTOM_RIGHT_DRIVETRAIN_MOTOR = 11; 
+	public static final int TOP_RIGHT_DRIVETRAIN_MOTOR = 0; 
+	public static final int BOTTOM_RIGHT_DRIVETRAIN_MOTOR = 1; 
 
 	
 	public static final int CLIMBER_ONE = 12; 
 	public static final int CLIMBER_TWO = 13; 
 	
 	public static final int COIL_MOTOR = 14; 
-	public static final int FLAP_OUT_ONE = 0; 
-	public static final int FLAP_OUT_TWO = 1; 
+	public static final int FLAP_OUT_ONE = 4; 
+	public static final int FLAP_OUT_TWO = 5; 
 	
 	// VISION 
 	public static final int IMG_WIDTH = 640;
