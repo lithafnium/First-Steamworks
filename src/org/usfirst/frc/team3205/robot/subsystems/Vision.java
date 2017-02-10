@@ -65,7 +65,6 @@ public class Vision extends Subsystem {
 //			camera2.setExposureManual(21); 
 
 			CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
-			//CvSink cvSink2 = CameraServer.getInstance().getVideo(camera2);
 			CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 320, 240);
 
 			Mat image = new Mat();
@@ -73,15 +72,11 @@ public class Vision extends Subsystem {
 			while(!Thread.interrupted()) {
 				cvSink1.grabFrame(image); 
 				if(camSwitch){
-//					cvSink2.setEnabled(false);
-//					cvSink1.setEnabled(true);
-//					cvSink1.grabFrame(image);
+//					;
 					cvSink1.setSource(camera1);
 				} else if(!camSwitch){
 					cvSink1.setSource(camera2); 
-//					cvSink1.setEnabled(false);
-//					cvSink2.setEnabled(true);
-//					cvSink2.grabFrame(image);     
+//					
 				}
 
 				outputStream.putFrame(image);
