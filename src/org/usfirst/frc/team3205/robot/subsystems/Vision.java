@@ -28,7 +28,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Vision extends Subsystem {
 
 	CameraServer serverOne;
-	UsbCamera camera; 
+	UsbCamera camera1;
+	UsbCamera camera2; 
 	Pipeline pipeLine; 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -53,16 +54,14 @@ public class Vision extends Subsystem {
 		Thread t = new Thread(() -> {
 
 
-			UsbCamera camera1 = new UsbCamera("cam0", 0); //CameraServer.getInstance().startAutomaticCapture(0);
+			camera1 = new UsbCamera("cam0", 0); //CameraServer.getInstance().startAutomaticCapture(0);
 			camera1.setResolution(320, 240);
-//			camera1.setBrightness(-50); 
-//			camera1.setExposureManual(21); 
+
 			camera1.setFPS(30);
-			UsbCamera camera2 = new UsbCamera("cam1", 1); //CameraServer.getInstance().startAutomaticCapture(1);
+			camera2 = new UsbCamera("cam1", 1); //CameraServer.getInstance().startAutomaticCapture(1);
 			camera2.setResolution(320, 240);
 			camera2.setFPS(30);
-//			camera2.setBrightness(-50); 
-//			camera2.setExposureManual(21); 
+ 
 
 			CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
 			CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 320, 240);
@@ -97,17 +96,19 @@ public class Vision extends Subsystem {
 	}
 
 	public void cameraInit(){
-		//		serverOne = CameraServer.getInstance();
-		//;
-		//		camera = serverOne.startAutomaticCapture();
-		//		//camera.setResolution(320, 240);
-		//		camera.setBrightness(-50);
-		//		camera.setExposureManual(21);
 		
 
 	}
 
 	public void processImages(){
+		if(camSwitch){
+			camera1.setBrightness(-50); 
+			camera1.setExposureManual(21); 
+		}
+		else{
+			camera2.setBrightness(-50); 
+			camera2.setExposureManual(21); 
+		}
 		CvSink cvSink = CameraServer.getInstance().getVideo();
 		// Setup a CvSource. This will send images back to the Dashboard
 		CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", RobotMap.IMG_WIDTH, RobotMap.IMG_HEIGHT);
