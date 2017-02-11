@@ -1,8 +1,11 @@
 package org.usfirst.frc.team3205.robot;
 
 import org.usfirst.frc.team3205.robot.commands.climber;
-import org.usfirst.frc.team3205.robot.commands.flapClose;
-import org.usfirst.frc.team3205.robot.commands.flapOpen;
+import org.usfirst.frc.team3205.robot.commands.dumpFlapClose;
+import org.usfirst.frc.team3205.robot.commands.dumpFlapOpen;
+import org.usfirst.frc.team3205.robot.commands.hopperUnCoil;
+import org.usfirst.frc.team3205.robot.commands.intakeFlapClose;
+import org.usfirst.frc.team3205.robot.commands.intakeFlapOpen;
 import org.usfirst.frc.team3205.robot.commands.hopperCoil;
 import org.usfirst.frc.team3205.robot.commands.pushGearIn;
 import org.usfirst.frc.team3205.robot.commands.pushGearOut;
@@ -99,18 +102,21 @@ public class OI {
 		Button x10 = new JoystickButton(xbox, 10);
 		
 	public OI(){
-		c6.whileHeld(new flapOpen());
-		c8.whileHeld(new flapClose()); 
+		c6.whileHeld(new dumpFlapOpen());
+		c8.whileHeld(new dumpFlapClose()); 
+		c9.whileHeld(new intakeFlapOpen());
+		c10.whileHeld(new intakeFlapClose()); 
 		c5.whileHeld(new pushGearOut());
 		c7.whileHeld(new pushGearIn()); 
 		c4.whileHeld(new hopperCoil());
-		c3.whileHeld(new climber());
+		c3.whileHeld(new hopperUnCoil());
+		c1.whileHeld(new climber());
 		//c1.toggleWhenPressed(new visionSwitchCameras());
-		c1.whenActive(new visionSwitchCameras());
-		c2.whenActive(new visionSwitchCameras());
+//		c1.whenActive(new visionSwitchCameras());
+//		c2.whenActive(new visionSwitchCameras());
 
-//		r1.whenPressed(new visionSwitchCameras());
-//		l1.whenPressed(new visionSwitchCameras());
+		r1.whenPressed(new visionSwitchCameras());
+		l1.whenPressed(new visionSwitchCameras());
 
 	}
 }

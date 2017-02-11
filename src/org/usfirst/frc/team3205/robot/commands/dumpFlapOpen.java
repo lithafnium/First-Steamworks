@@ -7,26 +7,33 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class flapClose extends Command {
-
-    public flapClose() {
+public class dumpFlapOpen extends Command {
+	double startDistance; 
+	boolean done = false; 
+    public dumpFlapOpen() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.box) ;
+    	requires(Robot.box); 
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.box.closeFlap(); 
+    	startDistance = Robot.box.getDistance(); 
+    	Robot.box.openFlap();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(Robot.box.getDistance() - startDistance >= 300){
+    		Robot.box.stopFlap();
+    		done = true; 
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return done;
     }
 
     // Called once after isFinished returns true

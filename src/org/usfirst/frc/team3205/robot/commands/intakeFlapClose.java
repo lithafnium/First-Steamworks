@@ -7,18 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class flapOpen extends Command {
+public class intakeFlapClose extends Command {
 
-    public flapOpen() {
+    public intakeFlapClose() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.box);
+    	requires(Robot.box) ;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.box.openFlap();
-
+    	Robot.box.closeIntakeFlap();
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -3,6 +3,7 @@ package org.usfirst.frc.team3205.robot.subsystems;
 import org.usfirst.frc.team3205.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -17,18 +18,26 @@ public class Hopper extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private SpeedController intake; // maybe take out
-	private Servo hopperOne;
-	private Servo hopperTwo; 
+	private SpeedController coil; // maybe take out
+	private Servo intakeFlap; 
+//	private Servo hopperOne;
+//	private Servo hopperTwo; 
+	private SpeedController flap; 
 	private DigitalInput isCoiled; 
+	Encoder openFlap; 
+
 
 
 	
 	public Hopper(){
-		intake = new Talon(RobotMap.COIL_MOTOR); 
-		hopperOne = new Servo(RobotMap.FLAP_OUT_ONE); 
-		hopperTwo = new Servo(RobotMap.FLAP_OUT_TWO);
+		coil = new Talon(RobotMap.COIL_MOTOR); 
+		flap = new Talon(RobotMap.FLAP_MOTOR); 
+		intakeFlap = new Servo(RobotMap.INTAKE_FLAP); 
+//		hopperOne = new Servo(RobotMap.FLAP_OUT_ONE); 
+//		hopperTwo = new Servo(RobotMap.FLAP_OUT_TWO);
 		isCoiled = new DigitalInput(RobotMap.IS_COILED); 
+		openFlap = new Encoder(23,24, false, Encoder.EncodingType.k4X);
+
 
 	}
     public void initDefaultCommand() {
@@ -37,39 +46,60 @@ public class Hopper extends Subsystem {
     }
     
     public void coil(){
-    	intake.set(RobotMap.COIL);
+    	coil.set(RobotMap.COIL);
     	
     }
+    public void unCoil(){
+    	coil.set(-RobotMap.COIL); 
+    }
+    
     public boolean isCoiled(){
     	return isCoiled.get(); 
     }
+    
     public void stop(){
-    	intake.set(0.0);
+    	coil.set(0.0);
     	
     }
-    
     public void openFlap(){
-    	hopperOne.set(1);
-    	hopperTwo.set(1); 
+    	flap.set(0.5);
+    }
+    public void closeFlap(){
+    	flap.set(-0.5); 
     }
     
-    public void closeFlap(){
-    	hopperOne.set(0);
-    	hopperTwo.set(0); 
+    public void stopFlap(){
+    	flap.set(0.0); 
     }
-    public double getServoOne(){
-    	return hopperOne.getPosition(); 
+    
+    public void openIntakeFlap(){
+    	intakeFlap.set(1.0); 
     }
-    public double getServoTwo(){
-    	return hopperTwo.getPosition(); 
+//    
+    public void closeIntakeFlap(){
+    	intakeFlap.set(0.0);
     }
+    
+    public void resetEncoder(){
+    	openFlap.reset(); 
+    }
+    public double getDistance(){
+    	return openFlap.getDistance(); 
+    }
+//    public double getServoOne(){
+//    	return hopperOne.getPosition(); 
+//    }
+//    public double getServoTwo(){
+//    	return hopperTwo.getPosition(); 
+//    }
     
     
     public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
     	SmartDashboard.putBoolean("Coiled", isCoiled());
-    	SmartDashboard.putNumber("Servo One", getServoOne()); 
-    	SmartDashboard.putNumber("Servo Two", getServoTwo()); 
+    	SmartDashboard.putDouble("Flap distance", openFlap.getDistance());
+//    	SmartDashboard.putNumber("Servo One", getServoOne()); 
+//    	SmartDashboard.putNumber("Servo Two", getServoTwo()); 
     }
     
 }
