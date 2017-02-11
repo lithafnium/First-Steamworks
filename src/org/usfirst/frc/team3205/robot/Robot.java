@@ -4,6 +4,7 @@ package org.usfirst.frc.team3205.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
+
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
@@ -20,6 +21,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.vision.CameraServer;
 
+import org.usfirst.frc.team3205.robot.commands.visionAutonomous;
+import org.usfirst.frc.team3205.robot.commands.lowbarTimedDrive;
 import org.usfirst.frc.team3205.robot.subsystems.Climber;
 //import org.usfirst.frc.team3205.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3205.robot.subsystems.DriveTrain;
@@ -47,8 +50,8 @@ public class Robot extends IterativeRobot {
 	Thread visionThread; 
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
-
+	//SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser chooser; 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -61,6 +64,9 @@ public class Robot extends IterativeRobot {
 		box = new Hopper(); 
 		vision = new Vision();
 		oi = new OI();
+		chooser = new SendableChooser();
+        chooser.addObject("Lowbar timed drive", new visionAutonomous());
+
 				
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -99,7 +105,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		updateSmartDashboard(); 
-		autonomousCommand = chooser.getSelected();
+		autonomousCommand = (Command) chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

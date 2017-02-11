@@ -31,8 +31,7 @@ public class Vision extends Subsystem {
 	UsbCamera camera1;
 	UsbCamera camera2; 
 	Pipeline pipeLine; 
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
+	
 	public double smallerHypot = 0.0; 
 	public double altitude = 0.0; 
 
@@ -42,10 +41,7 @@ public class Vision extends Subsystem {
 	public boolean camSwitch = false; 
 	private ArrayList<Rect> contours; 
 	//TreeMap<Rect, MatofPoint> contours; 
-	//private VisionThread visionThread;
-	//private double centerX = 0.0;
 	public Mat mat; 
-	//private final Object imgLock = new Object();
 	public Vision(){
 		mat = new Mat(); 
 		pipeLine = new Pipeline(); 
