@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
+//import org.opencv.core.Point;
+//import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.core.Rect; 
 //import com.ni.vision.NIVision.Rect;
@@ -131,6 +131,7 @@ public class Vision extends Subsystem {
 
 
 		}
+		//camera1.set
 	}
 	public void findAndSort(){
 		for(int i = 0; i < pipeLine.filterContoursOutput().size(); i++){
@@ -248,7 +249,7 @@ public class Vision extends Subsystem {
 		double distanceToContour = distanceToTarget(smallerRect); 
 		double perpendicularDistance = (Robot.driveTrain.getDistanceOne() + Robot.driveTrain.getDistanceTwo())/2;
 
-		double base = Math.sqrt(Math.pow(distanceToContour, 2) - Math.pow(perpendicularDistance, 2)); 
+		//double base = Math.sqrt(Math.pow(distanceToContour, 2) - Math.pow(perpendicularDistance, 2)); 
 
 		return Math.acos(perpendicularDistance / distanceToContour); 
 	}

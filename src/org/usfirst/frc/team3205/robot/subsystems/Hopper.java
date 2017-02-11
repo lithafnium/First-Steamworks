@@ -97,7 +97,7 @@ public class Hopper extends Subsystem {
     public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
     	SmartDashboard.putBoolean("Coiled", isCoiled());
-    	SmartDashboard.putDouble("Flap distance", openFlap.getDistance());
+    	SmartDashboard.putNumber("Flap distance", getDistance());
 //    	SmartDashboard.putNumber("Servo One", getServoOne()); 
 //    	SmartDashboard.putNumber("Servo Two", getServoTwo()); 
     }
