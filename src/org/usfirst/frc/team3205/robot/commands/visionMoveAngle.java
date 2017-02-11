@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class visionMoveAngle extends Command {
 	private double angle; 
-
+	boolean done = false; 
     public visionMoveAngle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -32,12 +32,13 @@ public class visionMoveAngle extends Command {
     protected void execute() {
     	if(Math.abs(Robot.driveTrain.getAngle() - angle) <= 5 ){
     		Robot.driveTrain.stop(); 
+    		done = true; 
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return done;
     }
 
     // Called once after isFinished returns true

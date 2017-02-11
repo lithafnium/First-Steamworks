@@ -1,12 +1,12 @@
 
 package org.usfirst.frc.team3205.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
+//import edu.wpi.cscore.UsbCamera;
+//import edu.wpi.cscore.CvSink;
+//import edu.wpi.cscore.CvSource;
+//
+//import org.opencv.core.Mat;
+//import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,10 +19,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
-import edu.wpi.first.wpilibj.vision.CameraServer;
+//import edu.wpi.first.wpilibj.vision.CameraServer;
 
 import org.usfirst.frc.team3205.robot.commands.visionAutonomous;
-import org.usfirst.frc.team3205.robot.commands.lowbarTimedDrive;
 import org.usfirst.frc.team3205.robot.subsystems.Climber;
 //import org.usfirst.frc.team3205.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3205.robot.subsystems.DriveTrain;

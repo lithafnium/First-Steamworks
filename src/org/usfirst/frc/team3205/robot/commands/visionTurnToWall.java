@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class visionTurnToWall extends Command {
-	
+	boolean done = false; 
 	private double angle; 
     public visionTurnToWall() {
         // Use requires() here to declare subsystem dependencies
@@ -34,12 +34,13 @@ public class visionTurnToWall extends Command {
     protected void execute() {
     	if(Math.abs(Robot.driveTrain.getAngle() - angle) <= 5 ){
     		Robot.driveTrain.stop(); 
+    		done = true; 
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return done;
     }
 
     // Called once after isFinished returns true
