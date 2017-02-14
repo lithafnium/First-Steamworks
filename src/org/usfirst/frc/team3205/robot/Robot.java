@@ -65,6 +65,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		chooser = new SendableChooser();
         chooser.addObject("Lowbar timed drive", new visionAutonomous());
+        SmartDashboard.putData("Auto mode", chooser);
 
 				
 		//chooser.addDefault("Default Auto", new ExampleCommand());

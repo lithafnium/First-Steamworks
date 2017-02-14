@@ -62,7 +62,7 @@ public class RobotMap {
     public static final double TAPE_DISTANCEBETWEEN = 8.25;
     public static final double PEG_LENGTH = 5.0; 
     //DRIVEBASE stuff 
-   // public static final int GYRO_PORT = 4; 
+    public static final int GYRO_PORT = 4; 
     
     //MISC 
     public static final int PDP_PORT = 18; // pdp for the climber 

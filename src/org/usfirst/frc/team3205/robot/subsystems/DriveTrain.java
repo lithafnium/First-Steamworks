@@ -46,7 +46,9 @@ public class DriveTrain extends Subsystem {
 		one = new Encoder(19,20, false, Encoder.EncodingType.k4X);
 		two = new Encoder(21,22, false, Encoder.EncodingType.k4X);
 		
-		//gyroSensor = new AnalogGyro(RobotMap.GYRO_PORT); 
+		gyroSensor = new AnalogGyro(RobotMap.GYRO_PORT); 
+    	calibrateGyro();
+
 	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.

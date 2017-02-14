@@ -21,7 +21,8 @@ public class visionTurnToPeg extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.calibrateGyro();
+    	Robot.driveTrain.resetGyro();
+    	//Robot.driveTrain.calibrateGyro();
     	angle = Robot.vision.findAngleToTurn(); 
     	
     	if(Robot.vision.leftOfPeg){
