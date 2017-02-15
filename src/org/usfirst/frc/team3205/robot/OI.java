@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3205.robot;
 
 import org.usfirst.frc.team3205.robot.commands.climber;
+import org.usfirst.frc.team3205.robot.commands.climberReset;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapClose;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapOpen;
 import org.usfirst.frc.team3205.robot.commands.hopperUnCoil;
@@ -111,6 +112,7 @@ public class OI {
 		c4.whileHeld(new hopperCoil());
 		c3.whileHeld(new hopperUnCoil());
 		c1.whileHeld(new climber());
+		c2.whileHeld(new climberReset());
 		//c1.toggleWhenPressed(new visionSwitchCameras());
 //		c1.whenActive(new visionSwitchCameras());
 //		c2.whenActive(new visionSwitchCameras());

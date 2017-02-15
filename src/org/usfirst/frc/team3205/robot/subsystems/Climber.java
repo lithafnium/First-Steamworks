@@ -22,6 +22,8 @@ public class Climber extends Subsystem {
 	private DigitalInput climbLimit;
 	private PowerDistributionPanel pdp; 
 	private Encoder climbDistance; 
+	
+	public double initialPosition; 
     
 	public Climber(){
 		one = new Talon(RobotMap.CLIMBER_ONE); 
@@ -51,6 +53,11 @@ public class Climber extends Subsystem {
 	public boolean climbingLimit(){
 		return climbLimit.get(); 
 	}
+	
+	public void resetDrum(){
+		one.set(RobotMap.CLIMB_SPEED);
+		two.set(RobotMap.CLIMB_SPEED); 
+	}
 	public void stop(){
 		one.set(0.0); 
 		two.set(0.0); 
@@ -68,8 +75,6 @@ public class Climber extends Subsystem {
     	//SmartDashboard.putNumber("Drive Encoder One", );
     	SmartDashboard.putBoolean("Hit climb", true);
     	SmartDashboard.putNumber("Current", getCurrent());
-
-    	
     }
     
 }

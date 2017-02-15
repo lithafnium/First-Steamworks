@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class climber extends Command {
-	double startDistance; 
+public class climberReset extends Command {
+	//double initial; 
 	boolean done = false; 
-    public climber() {
+    public climberReset() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.climb); 
@@ -18,17 +18,13 @@ public class climber extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.climb.climb(); 
-    	Robot.climb.resetEncoder();
-    	Robot.climb.initialPosition = Robot.climb.getDistance(); 
-    	startDistance = Robot.climb.getDistance(); 
-
+    	//initial = Robot.climb.initialPosition; 
+    	Robot.climb.climb();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// change later 
-    	if(Robot.climb.motorStall() || Robot.climb.getDistance() - startDistance >= 20 || Robot.climb.climbingLimit()){
+    	if(Robot.climb.getDistance() > 600){
     		Robot.climb.stop(); 
     		done = true; 
     	}
@@ -36,12 +32,11 @@ public class climber extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return done; 
+        return done;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climb.stop(); 
     }
 
     // Called when another command which requires one or more of the same
