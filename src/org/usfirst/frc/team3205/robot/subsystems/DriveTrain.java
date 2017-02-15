@@ -24,6 +24,8 @@ public class DriveTrain extends Subsystem {
 	private Ultrasonic ultraOne;
 	private Ultrasonic ultraTwo; 
 	
+	
+	public boolean backWards = false; 
 	AnalogGyro gyroSensor; 
 
 	Encoder one; 
@@ -53,11 +55,23 @@ public class DriveTrain extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		//setDefaultCommand(new drive()); 
+		setDefaultCommand(new drive()); 
 	}
 	public void driveNow(Joystick left, Joystick right){
-		robotDrive.tankDrive(left, right); 
-	}
+//    	driveTopLeft.setInverted(true);
+//    	driveBottomLeft.setInverted(true);
+//    	driveTopRight.setInverted(true);
+//    	driveBottomRight.setInverted(true);
+    	robotDrive.tankDrive(left, right);
+    }
+    
+    public void backwards(Joystick left, Joystick right){
+//    	driveTopLeft.setInverted(false);
+//    	driveBottomLeft.setInverted(false);
+//    	driveTopRight.setInverted(false);
+//    	driveBottomRight.setInverted(false);
+    	robotDrive.tankDrive(left, right);
+    }
 	
 	public void driveCertainAmounts(double left, double right){
 		robotDrive.tankDrive(left, right); 

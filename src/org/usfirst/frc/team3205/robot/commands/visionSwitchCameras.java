@@ -13,12 +13,14 @@ public class visionSwitchCameras extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.vision); 
+    	requires(Robot.driveTrain); 
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	//Robot.vision.camSwitch = !Robot.vision.camSwitch; 
     	Robot.vision.camSwitch = !Robot.vision.camSwitch; 
+    	Robot.driveTrain.backWards = !Robot.driveTrain.backWards; 
     }
 
     // Called repeatedly when this Command is scheduled to run
