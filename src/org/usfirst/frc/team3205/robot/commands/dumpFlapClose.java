@@ -2,13 +2,14 @@ package org.usfirst.frc.team3205.robot.commands;
 
 import org.usfirst.frc.team3205.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class dumpFlapClose extends Command {
-	double startDistance; 
+	Timer timer; 
 	boolean done = false; 
     public dumpFlapClose() {
         // Use requires() here to declare subsystem dependencies
@@ -18,14 +19,19 @@ public class dumpFlapClose extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	startDistance = Robot.box.getDistance();
+    	timer = new Timer(); 
     	Robot.box.closeFlap();
+    	timer.start(); 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.box.getDistance() - startDistance <= 100){
-    		Robot.box.stopFlap();
+//    	if(Robot.box.getDistance() - startDistance <= 100){
+//    		Robot.box.stopFlap();
+//    		done = true; 
+//    	}
+    	if(Timer.getFPGATimestamp() > 2.0){
+    		Robot.box.stopFlap(); 
     		done = true; 
     	}
     	

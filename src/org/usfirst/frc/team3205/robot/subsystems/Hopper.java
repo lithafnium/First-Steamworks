@@ -24,7 +24,7 @@ public class Hopper extends Subsystem {
 //	private Servo hopperTwo; 
 	private SpeedController flap; 
 	private DigitalInput isCoiled; 
-	Encoder openFlap; 
+	//Encoder openFlap; 
 
 
 
@@ -36,7 +36,7 @@ public class Hopper extends Subsystem {
 //		hopperOne = new Servo(RobotMap.FLAP_OUT_ONE); 
 //		hopperTwo = new Servo(RobotMap.FLAP_OUT_TWO);
 		isCoiled = new DigitalInput(RobotMap.IS_COILED); 
-		openFlap = new Encoder(23,24, false, Encoder.EncodingType.k4X);
+		//openFlap = new Encoder(23,24, false, Encoder.EncodingType.k4X);
 
 
 	}
@@ -61,13 +61,15 @@ public class Hopper extends Subsystem {
     	coil.set(0.0);
     	
     }
+    // outake flap
     public void openFlap(){
     	flap.set(0.5);
     }
+    // outtake flap
     public void closeFlap(){
     	flap.set(-0.5); 
     }
-    
+    // outtake flap 
     public void stopFlap(){
     	flap.set(0.0); 
     }
@@ -80,12 +82,12 @@ public class Hopper extends Subsystem {
     	intakeFlap.set(0.0);
     }
     
-    public void resetEncoder(){
-    	openFlap.reset(); 
-    }
-    public double getDistance(){
-    	return openFlap.getDistance(); 
-    }
+//    public void resetEncoder(){
+//    	openFlap.reset(); 
+//    }
+//    public double getDistance(){
+//    	return openFlap.getDistance(); 
+//    }
 //    public double getServoOne(){
 //    	return hopperOne.getPosition(); 
 //    }
@@ -97,7 +99,7 @@ public class Hopper extends Subsystem {
     public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
     	SmartDashboard.putBoolean("Coiled", isCoiled());
-    	SmartDashboard.putNumber("Flap distance", getDistance());
+    	//SmartDashboard.putNumber("Flap distance", getDistance());
 //    	SmartDashboard.putNumber("Servo One", getServoOne()); 
 //    	SmartDashboard.putNumber("Servo Two", getServoTwo()); 
     }
