@@ -17,18 +17,19 @@ public class pushGearOut extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.gear.pushOut(); 
+
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gear.pushOut(); 
 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.gear.getAngle() == 1.0;
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -45,11 +45,11 @@ public class DriveTrain extends Subsystem {
 		ultraOne = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_ONE, RobotMap.ULTRA_TRIGGER_INPUT_ONE); 
 		ultraTwo = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_TWO, RobotMap.ULTRA_TRIGGER_INPUT_TWO); 
 		
-		one = new Encoder(19,20, false, Encoder.EncodingType.k4X);
-		two = new Encoder(21,22, false, Encoder.EncodingType.k4X);
+		one = new Encoder(RobotMap.DRIVE_BASE_ENCODER_ONE_PORT_ONE,RobotMap.DRIVE_BASE_ENCODER_ONE_PORT_TWO, false, Encoder.EncodingType.k4X);
+		two = new Encoder(RobotMap.DRIVE_BASE_ENCODER_TWO_PORT_ONE,RobotMap.DRIVE_BASE_ENCODER_TWO_PORT_TWO, false, Encoder.EncodingType.k4X);
 		
-		gyroSensor = new AnalogGyro(RobotMap.GYRO_PORT); 
-    	calibrateGyro();
+		//gyroSensor = new AnalogGyro(RobotMap.GYRO_PORT); 
+    	//calibrateGyro();
 
 	}
 	public void initDefaultCommand() {
@@ -58,20 +58,20 @@ public class DriveTrain extends Subsystem {
 		setDefaultCommand(new drive()); 
 	}
 	public void driveNow(Joystick left, Joystick right){
-//    	driveTopLeft.setInverted(true);
-//    	driveBottomLeft.setInverted(true);
-//    	driveTopRight.setInverted(true);
-//    	driveBottomRight.setInverted(true);
+    	topLeft.setInverted(true);
+    	bottomLeft.setInverted(true);
+    	topRight.setInverted(true);
+    	bottomRight.setInverted(true);
     	robotDrive.tankDrive(left, right);
     }
     
     public void backwards(Joystick left, Joystick right){
-//    	driveTopLeft.setInverted(false);
-//    	driveBottomLeft.setInverted(false);
-//    	driveTopRight.setInverted(false);
-//    	driveBottomRight.setInverted(false);
+    	topLeft.setInverted(false);
+    	bottomLeft.setInverted(false);
+    	topRight.setInverted(false);
+    	bottomRight.setInverted(false);
     	robotDrive.tankDrive(left, right);
-    }
+    } 
 	
 	public void driveCertainAmounts(double left, double right){
 		robotDrive.tankDrive(left, right); 
@@ -123,8 +123,10 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("Ultrasonic sensor one", getDistanceOne()); 
 		SmartDashboard.putNumber("Ultrasonic sensor two", getDistanceTwo()); 
 		
-		SmartDashboard.putNumber("Drive Encoder One", getEncoderOne());
-    	SmartDashboard.putNumber("Drive Encoder Two", getEncoderTwo());
+		SmartDashboard.putNumber("Drive Encoder One - Right Side", getEncoderOne());
+    	SmartDashboard.putNumber("Drive Encoder Two - Left Side", getEncoderTwo());
+    	
+    	SmartDashboard.putBoolean("Backwards:" , backWards); 
     	
     	
     	//SmartDashboard.putNumber("Angle", getAngle()); 

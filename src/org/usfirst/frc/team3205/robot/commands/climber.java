@@ -28,7 +28,7 @@ public class climber extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// change later 
-    	if(Robot.climb.motorStall() || Robot.climb.getDistance() - startDistance >= 20 || Robot.climb.climbingLimit()){
+    	if(Robot.climb.motorStall() || Robot.climb.getDistance() - startDistance >= 20 || Robot.climb.climbingLimit() || Robot.climb.climbingLimitTwo()){
     		Robot.climb.stop(); 
     		done = true; 
     	}

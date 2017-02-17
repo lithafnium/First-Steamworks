@@ -24,7 +24,7 @@ public class climberReset extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.climb.getDistance() > 600){
+    	if(Robot.climb.getDistance() > 1200){
     		Robot.climb.stop(); 
     		done = true; 
     	}

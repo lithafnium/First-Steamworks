@@ -103,8 +103,8 @@ public class OI {
 		Button x10 = new JoystickButton(xbox, 10);
 		
 	public OI(){
-		c6.whileHeld(new dumpFlapOpen());
-		c8.whileHeld(new dumpFlapClose()); 
+		//c6.whileHeld(new dumpFlapOpen());
+		//c8.whileHeld(new dumpFlapClose()); 
 		c9.whileHeld(new intakeFlapOpen());
 		c10.whileHeld(new intakeFlapClose()); 
 		c5.whileHeld(new pushGearOut());
@@ -114,7 +114,7 @@ public class OI {
 		c1.whileHeld(new climber());
 		c2.whileHeld(new climberReset());
 		//c1.toggleWhenPressed(new visionSwitchCameras());
-//		c1.whenActive(new visionSwitchCameras());
+//		c1.whenActive(new visionSwitchCameras()); 
 //		c2.whenActive(new visionSwitchCameras());
 
 		r1.whenPressed(new visionSwitchCameras());

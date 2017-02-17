@@ -14,6 +14,7 @@ public class drive extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.driveTrain); 
+		requires(Robot.gear); 
 	}
 
 	// Called just before this Command runs the first time
@@ -22,6 +23,9 @@ public class drive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		if(Robot.gear.isGearIn()){
+			Robot.gear.pushOut();
+		}
 		if(!Robot.driveTrain.backWards){
 			Robot.driveTrain.driveNow(OI.left, OI.right); 
 		}

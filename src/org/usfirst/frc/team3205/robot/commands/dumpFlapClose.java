@@ -19,21 +19,19 @@ public class dumpFlapClose extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	timer = new Timer(); 
+    	//timer = new Timer(); 
     	Robot.box.closeFlap();
-    	timer.start(); 
+    	//timer.start(); 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	if(Robot.box.getDistance() - startDistance <= 100){
+
+//    	if(Robot.box.isFlapBack()){
 //    		Robot.box.stopFlap();
 //    		done = true; 
 //    	}
-    	if(Timer.getFPGATimestamp() > 2.0){
-    		Robot.box.stopFlap(); 
-    		done = true; 
-    	}
+
     	
     }
 

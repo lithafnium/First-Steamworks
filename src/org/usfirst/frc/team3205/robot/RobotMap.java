@@ -22,12 +22,16 @@ public class RobotMap {
 	public static final double CLIMB_SPEED = 0.6; 
 	
 	//LIMIT SWITCHES 
-	public static final int IS_GEAR_IN = 0; 
-	public static final int IS_UP = 1; 
-	public static final int IS_COILED = 2; 
+	public static final int IS_GEAR_IN = 9; 
+	public static final int IS_UP_ONE = 1; 
+	public static final int IS_UP_TWO = 2; 
+
+	public static final int IS_COILED = 3; 
+	
+	public static final int IS_OUTTAKE_FLAP_BACK = 4; 
 
 	//LINEAR ACTUATORS
-	public static final int PUSH_EM_OUT = 9; // push gear out port
+	public static final int PUSH_EM_OUT = 9; // push gear out port servo on gear subystem
 
 	//ULTRASONIC SENSORS 
 	public static final int ULTRA_TRIGGER_INPUT_ONE = 4; 
@@ -36,23 +40,31 @@ public class RobotMap {
 	public static final int ULTRA_TRIGGER_INPUT_TWO = 6; 
 	public static final int ULTRA_PULSE_OUTPUT_TWO = 7; 
 
+	//Encoder Ports 
+	public static final int DRIVE_BASE_ENCODER_ONE_PORT_ONE = 0; 
+	public static final int DRIVE_BASE_ENCODER_ONE_PORT_TWO = 1;
+	public static final int DRIVE_BASE_ENCODER_TWO_PORT_ONE = 2; 
+	public static final int DRIVE_BASE_ENCODER_TWO_PORT_TWO = 3; 
+	
+	public static final int CLIMBER_ENCODER_PORT_ONE = 4; 
+	public static final int CLIMBER_ENCODER_PORT_TWO = 5; 
 
 	// MOTOR PORTS 
-	public static final int TOP_LEFT_DRIVETRAIN_MOTOR = 2; 
-	public static final int BOTTOM_LEFT_DRIVETRAIN_MOTOR = 3; 
+	public static final int TOP_LEFT_DRIVETRAIN_MOTOR = 0; 
+	public static final int BOTTOM_LEFT_DRIVETRAIN_MOTOR = 1; 
 
-	public static final int TOP_RIGHT_DRIVETRAIN_MOTOR = 0; 
-	public static final int BOTTOM_RIGHT_DRIVETRAIN_MOTOR = 1; 
+	public static final int TOP_RIGHT_DRIVETRAIN_MOTOR = 3; 
+	public static final int BOTTOM_RIGHT_DRIVETRAIN_MOTOR = 2; 
 
 	
-	public static final int CLIMBER_ONE = 12; 
-	public static final int CLIMBER_TWO = 13; 
+	public static final int CLIMBER_ONE = 4; 
+	public static final int CLIMBER_TWO = 5; 
 	
-	public static final int COIL_MOTOR = 14; 
+	public static final int COIL_MOTOR = 6; // hopper tarp motor 
 	//public static final int FLAP_OUT_ONE = 4; 
 	//public static final int FLAP_OUT_TWO = 5; 
-	public static final int FLAP_MOTOR = 4; 
-	public static final int INTAKE_FLAP = 5; 
+	public static final int FLAP_MOTOR = 7; // outtake flap 
+	public static final int INTAKE_FLAP = 8; 
 	// VISION 
 	public static final int IMG_WIDTH = 640;
     public static final int IMG_HEIGHT = 480;

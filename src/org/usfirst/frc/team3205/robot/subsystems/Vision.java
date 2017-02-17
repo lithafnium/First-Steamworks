@@ -51,11 +51,11 @@ public class Vision extends Subsystem {
 
 
 			camera1 = new UsbCamera("cam0", 0); //CameraServer.getInstance().startAutomaticCapture(0);
-			camera1.setResolution(320, 240);
+			camera1.setResolution(160, 120);
 
 			camera1.setFPS(30);
 			camera2 = new UsbCamera("cam1", 1); //CameraServer.getInstance().startAutomaticCapture(1);
-			camera2.setResolution(320, 240);
+			camera2.setResolution(160, 120);
 			camera2.setFPS(30);
  
 

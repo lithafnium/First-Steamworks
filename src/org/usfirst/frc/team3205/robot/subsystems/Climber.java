@@ -19,18 +19,22 @@ public class Climber extends Subsystem {
     // here. Call these from Commands.
 	private SpeedController one; 
 	private SpeedController two; 
-	private DigitalInput climbLimit;
+	private DigitalInput climbLimitOne;
+	private DigitalInput climbLimitTwo; 
 	private PowerDistributionPanel pdp; 
 	private Encoder climbDistance; 
 	
 	public double initialPosition; 
-    
+    // two limit switches 
 	public Climber(){
 		one = new Talon(RobotMap.CLIMBER_ONE); 
 		two = new Talon(RobotMap.CLIMBER_TWO); 
-		climbLimit = new DigitalInput(RobotMap.IS_UP); 
+		climbLimitOne = new DigitalInput(RobotMap.IS_UP_ONE); 
+		climbLimitTwo = new DigitalInput(RobotMap.IS_UP_TWO); 
+
+		
 		pdp = new PowerDistributionPanel(); 
-		climbDistance = new Encoder(23, 24, false, Encoder.EncodingType.k4X); 
+		climbDistance = new Encoder(RobotMap.CLIMBER_ENCODER_PORT_ONE, RobotMap.CLIMBER_ENCODER_PORT_TWO, false, Encoder.EncodingType.k4X); 
 
 	}
 	public void initDefaultCommand() {
@@ -39,7 +43,7 @@ public class Climber extends Subsystem {
     }
 	public void climb(){
 		one.set(RobotMap.CLIMB_SPEED); 
-		two.set(RobotMap.CLIMB_SPEED);
+		//two.set(RobotMap.CLIMB_SPEED);
 	}
 	
 	public double getDistance(){
@@ -51,12 +55,15 @@ public class Climber extends Subsystem {
 	}
 	
 	public boolean climbingLimit(){
-		return climbLimit.get(); 
+		return climbLimitOne.get(); 
+	}
+	public boolean climbingLimitTwo(){
+		return climbLimitTwo.get(); 
 	}
 	
 	public void resetDrum(){
 		one.set(RobotMap.CLIMB_SPEED);
-		two.set(RobotMap.CLIMB_SPEED); 
+		//two.set(RobotMap.CLIMB_SPEED); 
 	}
 	public void stop(){
 		one.set(0.0); 

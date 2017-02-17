@@ -30,7 +30,8 @@ public class dumpFlapOpen extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Timer.getFPGATimestamp() > 2.0){
+    	
+    	if(Timer.getFPGATimestamp() > 0.2){ 
     		Robot.box.stopFlap(); 
     		done = true; 
     	}
@@ -43,6 +44,7 @@ public class dumpFlapOpen extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	timer.reset(); 
         return done;
     }
 
