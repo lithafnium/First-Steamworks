@@ -38,9 +38,10 @@ public class Hopper extends Subsystem {
 //		hopperOne = new Servo(RobotMap.FLAP_OUT_ONE); 
 //		hopperTwo = new Servo(RobotMap.FLAP_OUT_TWO);
 		isCoiled = new DigitalInput(RobotMap.IS_COILED); 
+		//===========================================================================
 		//flapBack = new DigitalInput(RobotMap.IS_OUTTAKE_FLAP_BACK);  UNCOMMENT THIS 
 		//openFlap = new Encoder(23,24, false, Encoder.EncodingType.k4X); UNCOMMENT THIS 
-
+		//============================================================================
 
 	}
     public void initDefaultCommand() {

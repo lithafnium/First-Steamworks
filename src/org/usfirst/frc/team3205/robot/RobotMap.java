@@ -23,10 +23,10 @@ public class RobotMap {
 	
 	//LIMIT SWITCHES 
 	public static final int IS_GEAR_IN = 9; 
-	public static final int IS_UP_ONE = 1; 
-	public static final int IS_UP_TWO = 2; 
+	public static final int IS_UP_ONE = 8; 
+	public static final int IS_UP_TWO = 7; 
 
-	public static final int IS_COILED = 3; 
+	public static final int IS_COILED = 6; 
 	
 	public static final int IS_OUTTAKE_FLAP_BACK = 4; 
 
@@ -41,10 +41,10 @@ public class RobotMap {
 	public static final int ULTRA_PULSE_OUTPUT_TWO = 7; 
 
 	//Encoder Ports 
-	public static final int DRIVE_BASE_ENCODER_ONE_PORT_ONE = 0; 
-	public static final int DRIVE_BASE_ENCODER_ONE_PORT_TWO = 1;
-	public static final int DRIVE_BASE_ENCODER_TWO_PORT_ONE = 2; 
-	public static final int DRIVE_BASE_ENCODER_TWO_PORT_TWO = 3; 
+	public static final int DRIVE_BASE_ENCODER_ONE_PORT_ONE = 0; // right side
+	public static final int DRIVE_BASE_ENCODER_ONE_PORT_TWO = 1; // right side
+	public static final int DRIVE_BASE_ENCODER_TWO_PORT_ONE = 2; // left side 
+	public static final int DRIVE_BASE_ENCODER_TWO_PORT_TWO = 3; // left side 
 	
 	public static final int CLIMBER_ENCODER_PORT_ONE = 4; 
 	public static final int CLIMBER_ENCODER_PORT_TWO = 5; 

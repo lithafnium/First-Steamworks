@@ -42,8 +42,8 @@ public class DriveTrain extends Subsystem {
 		robotDrive = new RobotDrive(topLeft, bottomLeft,  topRight, bottomRight); 
 		robotDrive.setSafetyEnabled(false);
 		
-		ultraOne = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_ONE, RobotMap.ULTRA_TRIGGER_INPUT_ONE); 
-		ultraTwo = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_TWO, RobotMap.ULTRA_TRIGGER_INPUT_TWO); 
+//		ultraOne = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_ONE, RobotMap.ULTRA_TRIGGER_INPUT_ONE); 
+//		ultraTwo = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_TWO, RobotMap.ULTRA_TRIGGER_INPUT_TWO); 
 		
 		one = new Encoder(RobotMap.DRIVE_BASE_ENCODER_ONE_PORT_ONE,RobotMap.DRIVE_BASE_ENCODER_ONE_PORT_TWO, false, Encoder.EncodingType.k4X);
 		two = new Encoder(RobotMap.DRIVE_BASE_ENCODER_TWO_PORT_ONE,RobotMap.DRIVE_BASE_ENCODER_TWO_PORT_TWO, false, Encoder.EncodingType.k4X);
@@ -120,8 +120,8 @@ public class DriveTrain extends Subsystem {
     	gyroSensor.reset(); 
     }
 	public void updateSmartDashboard(){
-		SmartDashboard.putNumber("Ultrasonic sensor one", getDistanceOne()); 
-		SmartDashboard.putNumber("Ultrasonic sensor two", getDistanceTwo()); 
+//		SmartDashboard.putNumber("Ultrasonic sensor one", getDistanceOne()); 
+//		SmartDashboard.putNumber("Ultrasonic sensor two", getDistanceTwo()); 
 		
 		SmartDashboard.putNumber("Drive Encoder One - Right Side", getEncoderOne());
     	SmartDashboard.putNumber("Drive Encoder Two - Left Side", getEncoderTwo());
