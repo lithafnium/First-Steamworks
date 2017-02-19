@@ -18,20 +18,20 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	
 	//MOTORSPEEDS
-	public static final double COIL = 0.6; 
-	public static final double CLIMB_SPEED = 0.6; 
+	public static final double COIL = 1; 
+	public static final double CLIMB_SPEED = -.6; 
 	
 	//LIMIT SWITCHES 
 	public static final int IS_GEAR_IN = 9; 
-	public static final int IS_UP_ONE = 8; 
+	public static final int IS_UP_ONE = 6; 
 	public static final int IS_UP_TWO = 7; 
 
-	public static final int IS_COILED = 6; 
+	public static final int IS_COILED = 8; 
 	
 	public static final int IS_OUTTAKE_FLAP_BACK = 4; 
 
 	//LINEAR ACTUATORS
-	public static final int PUSH_EM_OUT = 9; // push gear out port servo on gear subystem
+	public static final int PUSH_EM_OUT = 8; // push gear out port servo on gear subsystem
 
 	//ULTRASONIC SENSORS 
 	public static final int ULTRA_TRIGGER_INPUT_ONE = 4; 
@@ -64,7 +64,7 @@ public class RobotMap {
 	//public static final int FLAP_OUT_ONE = 4; 
 	//public static final int FLAP_OUT_TWO = 5; 
 	public static final int FLAP_MOTOR = 7; // outtake flap 
-	public static final int INTAKE_FLAP = 8; 
+	public static final int INTAKE_FLAP = 9; 
 	// VISION 
 	public static final int IMG_WIDTH = 640;
     public static final int IMG_HEIGHT = 480;
@@ -79,4 +79,5 @@ public class RobotMap {
     //MISC 
     public static final int PDP_PORT = 18; // pdp for the climber 
     public static final double PDP_STALL = 20.0;  // if the motor is stalling 
+    public static boolean switchDirection = false; 
 }

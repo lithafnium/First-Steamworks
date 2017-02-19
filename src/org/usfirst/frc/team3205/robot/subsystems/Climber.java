@@ -42,8 +42,19 @@ public class Climber extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 	public void climb(){
-		one.set(RobotMap.CLIMB_SPEED); 
-		//two.set(RobotMap.CLIMB_SPEED);
+		
+		two.set(RobotMap.CLIMB_SPEED);
+		one.set(RobotMap.CLIMB_SPEED);
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		two.set(0);
+//		one.set(0);
+//		two.set(RobotMap.CLIMB_SPEED);
+		
 	}
 	
 	public double getDistance(){
@@ -51,7 +62,7 @@ public class Climber extends Subsystem {
 	}
 	
 	public void resetEncoder(){
-		climbDistance.reset(); 
+		//climbDistance.reset(); 
 	}
 	
 	public boolean climbingLimit(){
@@ -82,6 +93,7 @@ public class Climber extends Subsystem {
     	//SmartDashboard.putNumber("Drive Encoder One", );
     	SmartDashboard.putBoolean("Hit climb", true);
     	SmartDashboard.putNumber("Current", getCurrent());
+    	SmartDashboard.putNumber("Climber Encoder", getDistance());
     }
     
 }

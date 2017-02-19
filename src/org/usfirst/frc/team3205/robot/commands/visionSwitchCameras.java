@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3205.robot.commands;
 
 import org.usfirst.frc.team3205.robot.Robot;
+import org.usfirst.frc.team3205.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,7 +21,8 @@ public class visionSwitchCameras extends Command {
     protected void initialize() {
     	//Robot.vision.camSwitch = !Robot.vision.camSwitch; 
     	Robot.vision.camSwitch = !Robot.vision.camSwitch; 
-    	Robot.driveTrain.backWards = !Robot.driveTrain.backWards; 
+    	//Robot.driveTrain.backWards = !Robot.driveTrain.backWards; 
+    	RobotMap.switchDirection = !RobotMap.switchDirection; 
     }
 
     // Called repeatedly when this Command is scheduled to run

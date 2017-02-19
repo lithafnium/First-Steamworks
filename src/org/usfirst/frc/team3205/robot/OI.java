@@ -107,8 +107,8 @@ public class OI {
 		//c8.whileHeld(new dumpFlapClose()); 
 		c9.whileHeld(new intakeFlapOpen());
 		c10.whileHeld(new intakeFlapClose()); 
-		c5.whileHeld(new pushGearOut());
-		c7.whileHeld(new pushGearIn()); 
+		c5.whenPressed(new pushGearOut());
+		c7.whenPressed(new pushGearIn()); 
 		c4.whileHeld(new hopperCoil());
 		c3.whileHeld(new hopperUnCoil());
 		c1.whileHeld(new climber());
