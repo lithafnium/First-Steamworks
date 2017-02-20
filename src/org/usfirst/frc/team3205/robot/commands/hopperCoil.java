@@ -22,14 +22,14 @@ public class hopperCoil extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.box.isCoiled()){
-    		Robot.box.stop(); 
-    	}
+//    	if(Robot.box.isCoiled()){
+//    		Robot.box.stop(); 
+//    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.box.isCoiled();
+        return false;
     }
 
     // Called once after isFinished returns true

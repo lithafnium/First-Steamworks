@@ -21,6 +21,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //import edu.wpi.first.wpilibj.vision.CameraServer;
 
+
+
+//import org.usfirst.frc.team3205.robot.commands.resetArmEncoder;
+import org.usfirst.frc.team3205.robot.commands.resetClimberEncoders;
+import org.usfirst.frc.team3205.robot.commands.resetDriveTrainEncoders;
 import org.usfirst.frc.team3205.robot.commands.visionAutonomous;
 import org.usfirst.frc.team3205.robot.subsystems.Climber;
 //import org.usfirst.frc.team3205.robot.commands.ExampleCommand;
@@ -57,6 +62,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		System.out.println("testing 123");
 		driveTrain = new DriveTrain();
 		gear = new Gear(); 
 		climb = new Climber(); 
@@ -64,8 +70,11 @@ public class Robot extends IterativeRobot {
 		vision = new Vision();
 		oi = new OI();
 		chooser = new SendableChooser();
-        chooser.addObject("Lowbar timed drive", new visionAutonomous());
+        chooser.addObject("Gear", new visionAutonomous());
         SmartDashboard.putData("Auto mode", chooser);
+        
+        SmartDashboard.putData("Reset climber Encoder", new resetClimberEncoders());
+        SmartDashboard.putData("Reset DriveTrain Encoders", new resetDriveTrainEncoders());
 
 				
 		//chooser.addDefault("Default Auto", new ExampleCommand());

@@ -2,8 +2,6 @@ package org.usfirst.frc.team3205.robot.commands;
 
 import org.usfirst.frc.team3205.robot.OI;
 import org.usfirst.frc.team3205.robot.Robot;
-import org.usfirst.frc.team3205.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -25,14 +23,11 @@ public class drive extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if(Robot.gear.isGearIn()){
-			
+			//Robot.driveTrain.stop(); 
+			Robot.gear.retract();
 		}
-		if(RobotMap.switchDirection){
-			Robot.driveTrain.driveNow(OI.left, OI.right); 
-		}
-		else{
-			Robot.driveTrain.backwards(OI.right, OI.left); 
-		}
+		Robot.driveTrain.driveNow(OI.left, OI.right);
+		//Robot.driveTrain.backwards(OI.right, OI.left); 
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

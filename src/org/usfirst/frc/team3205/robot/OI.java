@@ -1,7 +1,10 @@
 package org.usfirst.frc.team3205.robot;
 
+import org.usfirst.frc.team3205.robot.commands.cameraOneInit;
+import org.usfirst.frc.team3205.robot.commands.cameraTwoInit;
 import org.usfirst.frc.team3205.robot.commands.climber;
 import org.usfirst.frc.team3205.robot.commands.climberReset;
+import org.usfirst.frc.team3205.robot.commands.driveBaseSwitchDirections;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapClose;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapOpen;
 import org.usfirst.frc.team3205.robot.commands.hopperUnCoil;
@@ -107,18 +110,28 @@ public class OI {
 		//c8.whileHeld(new dumpFlapClose()); 
 		c9.whileHeld(new intakeFlapOpen());
 		c10.whileHeld(new intakeFlapClose()); 
+		
 		c5.whenPressed(new pushGearOut());
 		c7.whenPressed(new pushGearIn()); 
+		
+//		c5.whenActive(new pushGearOut());
+//		c7.whenActive(new pushGearIn()); 
+//		c5.toggleWhenPressed(new pushGearOut());
+//	c7.toggleWhenPressed(new pushGearIn()); 
+//
+//		c5.whileHeld(new pushGearOut());
+//		c7.whileHeld(new pushGearIn()); 
 		c4.whileHeld(new hopperCoil());
 		c3.whileHeld(new hopperUnCoil());
 		c1.whileHeld(new climber());
 		c2.whileHeld(new climberReset());
-		//c1.toggleWhenPressed(new visionSwitchCameras());
-//		c1.whenActive(new visionSwitchCameras()); 
-//		c2.whenActive(new visionSwitchCameras());
+		c11.toggleWhenPressed(new cameraOneInit());
+		c12.toggleWhenPressed(new cameraTwoInit());
 
-		r1.whenPressed(new visionSwitchCameras());
-		l1.whenPressed(new visionSwitchCameras());
-
+		r1.toggleWhenPressed(new driveBaseSwitchDirections());
+		l1.toggleWhenPressed(new visionSwitchCameras());
+		//r1.whenPressed(new visionSwitchCameras());
+//		l1.whenPressed(new visionSwitchCameras());
+		//r1.whenActive(new visionSwitchCameras());
 	}
 }

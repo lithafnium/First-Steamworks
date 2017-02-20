@@ -21,8 +21,8 @@ public class visionSwitchCameras extends Command {
     protected void initialize() {
     	//Robot.vision.camSwitch = !Robot.vision.camSwitch; 
     	Robot.vision.camSwitch = !Robot.vision.camSwitch; 
+    	//RobotMap.switchDirection = !RobotMap.switchDirection; 
     	//Robot.driveTrain.backWards = !Robot.driveTrain.backWards; 
-    	RobotMap.switchDirection = !RobotMap.switchDirection; 
     }
 
     // Called repeatedly when this Command is scheduled to run

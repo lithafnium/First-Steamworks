@@ -7,35 +7,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class pushGearOut extends Command {
+public class resetClimberEncoders extends Command {
 
-    public pushGearOut() {
+    public resetClimberEncoders() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.gear); 
+    	requires(Robot.climb) ;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println(";alksdfja;lskjfl;aksdfj");
-    	Robot.gear.pushOut(); 
+    	Robot.climb.resetEncoder();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.gear.pushOut(); 
-
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.gear.pushOut(); 
-
     }
 
     // Called when another command which requires one or more of the same

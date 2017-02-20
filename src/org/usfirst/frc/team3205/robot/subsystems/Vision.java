@@ -38,7 +38,7 @@ public class Vision extends Subsystem {
 
 	// private static final double OPTIMAL_DEG = 60.0; //change later; 
 	public boolean leftOfPeg = false; 
-	public boolean camSwitch = false; 
+	public volatile boolean camSwitch = false; 
 	private ArrayList<Rect> contours; 
 	//TreeMap<Rect, MatofPoint> contours; 
 	public Mat mat; 
@@ -47,38 +47,37 @@ public class Vision extends Subsystem {
 		pipeLine = new Pipeline(); 
 		contours = new ArrayList<>(); 
 		
-		Thread t = new Thread(() -> {
-
-
-			camera1 = new UsbCamera("cam0", 0); //CameraServer.getInstance().startAutomaticCapture(0);
-			camera1.setResolution(160, 120);
-
-			camera1.setFPS(30);
-			camera2 = new UsbCamera("cam1", 1); //CameraServer.getInstance().startAutomaticCapture(1);
-			camera2.setResolution(160, 120);
-			camera2.setFPS(30);
- 
-
-			CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
-			CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 320, 240);
-
-			Mat image = new Mat();
-
-			while(!Thread.interrupted()) {
-				cvSink1.grabFrame(image); 
-				if(camSwitch){
-//					;
-					cvSink1.setSource(camera1);
-				} else if(!camSwitch){
-					cvSink1.setSource(camera2); 
-//					
-				}
-
-				outputStream.putFrame(image);
-			}
-
-		});
-		t.start();
+//		Thread t = new Thread(() -> {
+//
+//
+//			camera1 = new UsbCamera("cam0", 0); //CameraServer.getInstance().startAutomaticCapture(0);
+//			camera1.setResolution(160, 120);
+//
+//			camera1.setFPS(30);
+//			camera2 = new UsbCamera("cam1", 1); //CameraServer.getInstance().startAutomaticCapture(1);
+//			camera2.setResolution(160, 120);
+//			camera2.setFPS(30);
+// 
+//
+//			CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
+//			CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 320, 240);
+//
+//			Mat image = new Mat();
+//
+//			while(!Thread.interrupted()) {
+//				cvSink1.grabFrame(image); 
+//				if(camSwitch){
+//					cvSink1.setSource(camera1);
+//				} else if(!camSwitch){
+//					cvSink1.setSource(camera2); 
+////					
+//				}
+//
+//				outputStream.putFrame(image);
+//			}
+//
+//		});
+//		t.start();
 
 	}
 //	public void switchCameras(){

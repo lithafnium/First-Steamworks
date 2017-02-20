@@ -20,25 +20,32 @@ public class climber extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.climb.climb(); 
     	Robot.climb.resetEncoder();
     	Robot.climb.initialPosition = Robot.climb.getDistance(); 
     	startDistance = Robot.climb.getDistance(); 
+
+    	Robot.climb.climb(); 
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// change later 
-    	if(Robot.climb.motorStall() || Robot.climb.getDistance() - startDistance >= 20 || Robot.climb.climbingLimit() || Robot.climb.climbingLimitTwo()){
+//    	if(Robot.climb.motorStall() || Robot.climb.getDistance() - startDistance >= 20 || Robot.climb.climbingLimit()){
+//    		Robot.climb.stop(); 
+//    		done = true; 
+//    	}
+    	if(Robot.climb.climbingLimit()){
     		Robot.climb.stop(); 
-    		done = true; 
+        	Robot.climb.resetEncoder();
+
+    		//done = true; 
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return done; 
+        return Robot.climb.climbingLimit(); 
     }
 
     // Called once after isFinished returns true
@@ -49,5 +56,7 @@ public class climber extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+		Robot.climb.stop();
+
     }
 }

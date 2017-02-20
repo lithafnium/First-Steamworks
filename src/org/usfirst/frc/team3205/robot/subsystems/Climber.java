@@ -20,21 +20,21 @@ public class Climber extends Subsystem {
 	private SpeedController one; 
 	private SpeedController two; 
 	private DigitalInput climbLimitOne;
-	private DigitalInput climbLimitTwo; 
+	//private DigitalInput climbLimitTwo; 
 	private PowerDistributionPanel pdp; 
 	private Encoder climbDistance; 
 	
 	public double initialPosition; 
     // two limit switches 
 	public Climber(){
-		one = new Talon(RobotMap.CLIMBER_ONE); 
-		two = new Talon(RobotMap.CLIMBER_TWO); 
+		one = new Talon(RobotMap.CLIMBER_BACK); 
+		two = new Talon(RobotMap.CLIMBER_FRONT); 
 		climbLimitOne = new DigitalInput(RobotMap.IS_UP_ONE); 
-		climbLimitTwo = new DigitalInput(RobotMap.IS_UP_TWO); 
+		//climbLimitTwo = new DigitalInput(RobotMap.IS_UP_TWO); 
 
 		
 		pdp = new PowerDistributionPanel(); 
-		climbDistance = new Encoder(RobotMap.CLIMBER_ENCODER_PORT_ONE, RobotMap.CLIMBER_ENCODER_PORT_TWO, false, Encoder.EncodingType.k4X); 
+		climbDistance = new Encoder(RobotMap.CLIMBER_ENCODER_PORT_TWO, RobotMap.CLIMBER_ENCODER_PORT_ONE, false, Encoder.EncodingType.k4X); 
 
 	}
 	public void initDefaultCommand() {
@@ -62,27 +62,28 @@ public class Climber extends Subsystem {
 	}
 	
 	public void resetEncoder(){
-		//climbDistance.reset(); 
+		climbDistance.reset(); 
 	}
 	
 	public boolean climbingLimit(){
 		return climbLimitOne.get(); 
 	}
-	public boolean climbingLimitTwo(){
-		return climbLimitTwo.get(); 
-	}
+//	public boolean climbingLimitTwo(){
+//		return climbLimitTwo.get(); 
+//	}
 	
 	public void resetDrum(){
 		one.set(RobotMap.CLIMB_SPEED);
-		//two.set(RobotMap.CLIMB_SPEED); 
+		two.set(RobotMap.CLIMB_SPEED); 
 	}
 	public void stop(){
-		one.set(0.0); 
 		two.set(0.0); 
+		one.set(0.0); 
+		
 	}
 	public double getCurrent(){
-		//return pdp.getCurrent(RobotMap.PDP_PORT); 
-		return 0.0;
+		return pdp.getCurrent(RobotMap.CLIMBER_BACK); 
+		
 	}
 	
 	public boolean motorStall(){
@@ -91,7 +92,7 @@ public class Climber extends Subsystem {
 	}
 	public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
-    	SmartDashboard.putBoolean("Hit climb", true);
+    	SmartDashboard.putBoolean("Hit climb", climbingLimit());
     	SmartDashboard.putNumber("Current", getCurrent());
     	SmartDashboard.putNumber("Climber Encoder", getDistance());
     }
