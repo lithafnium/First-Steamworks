@@ -20,7 +20,7 @@ public class autoMoveForwardRightPeg extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	timer.start(); 
-    	Robot.driveTrain.driveCertainAmounts(0.5, 0.6);
+    	Robot.driveTrain.driveCertainAmounts(-0.5, -0.6);
     }
 
     // Called repeatedly when this Command is scheduled to run
