@@ -131,6 +131,8 @@ public class OI {
 
 		r1.toggleWhenPressed(new driveBaseSwitchDirections());
 		l1.toggleWhenPressed(new visionSwitchCameras());
+		
+		//l7.whenPressed(new resetClimberBoolean());
 		//r1.whenPressed(new visionSwitchCameras());
 //		l1.whenPressed(new visionSwitchCameras());
 		//r1.whenActive(new visionSwitchCameras());

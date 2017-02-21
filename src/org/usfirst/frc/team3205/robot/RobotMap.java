@@ -49,8 +49,8 @@ public class RobotMap {
 	public static final int CLIMBER_ENCODER_PORT_TWO = 5; 
 
 	// MOTOR PORTS 
-	public static final int TOP_LEFT_DRIVETRAIN_MOTOR = 0; 
-	public static final int BOTTOM_LEFT_DRIVETRAIN_MOTOR = 1; 
+	public static final int TOP_LEFT_DRIVETRAIN_MOTOR = 6; 
+	public static final int BOTTOM_LEFT_DRIVETRAIN_MOTOR = 9; 
 
 	public static final int TOP_RIGHT_DRIVETRAIN_MOTOR = 3; 
 	public static final int BOTTOM_RIGHT_DRIVETRAIN_MOTOR = 2; 
@@ -59,10 +59,10 @@ public class RobotMap {
 	public static final int CLIMBER_BACK =  7; 
 	public static final int CLIMBER_FRONT = 5;  
 	
-	public static final int COIL_MOTOR = 9; // hopper tarp motor 
+	public static final int COIL_MOTOR = 1; // hopper tarp motor 
 	//public static final int FLAP_OUT_ONE = 4;  
 	//public static final int FLAP_OUT_TWO = 5; 
-	public static final int FLAP_MOTOR = 6; // outtake flap 
+	public static final int FLAP_MOTOR = 0; // outtake flap 
 	public static final int PUSH_EM_OUT = 8; // push gear out port servo on gear subsystem
 
 	public static final int INTAKE_FLAP = 4; // linear actutor  

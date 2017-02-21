@@ -2,6 +2,8 @@ package org.usfirst.frc.team3205.robot.commands;
 
 import org.usfirst.frc.team3205.robot.OI;
 import org.usfirst.frc.team3205.robot.Robot;
+import org.usfirst.frc.team3205.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -36,6 +38,12 @@ public class drive extends Command {
 		if(OI.controller.getRawButton(10)){
 			Robot.box.closeIntakeFlap();
 		}
+		if(Robot.climb.climbingLimit()){
+    		RobotMap.climberHit = true; 
+    		
+
+    		//done = true; 
+    	}
 		
 		Robot.driveTrain.driveNow(OI.left, OI.right);
 		//Robot.driveTrain.backwards(OI.right, OI.left); 

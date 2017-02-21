@@ -18,13 +18,15 @@ public class autoMoveForwardCenterPeg extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.driveCertainAmounts(-0.5, -0.5);
+    	Robot.driveTrain.driveCertainAmounts(-0.55, -0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.gear.isGearIn()){
     		Robot.driveTrain.stop();
+    		Robot.gear.retract(); 
+
     		done = true; 
     	}
     }

@@ -2,6 +2,7 @@ package org.usfirst.frc.team3205.robot.commands;
 
 import org.usfirst.frc.team3205.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,27 +10,35 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class autoMoveForwardLeftPeg extends Command {
 	boolean done; 
+	Timer timer; 
     public autoMoveForwardLeftPeg() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain); 
     	requires(Robot.gear);
+    	timer = new Timer(); 
+
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	timer.start(); 
     	Robot.gear.pushOut(); 
-    	Robot.driveTrain.driveCertainAmounts(-0.695, -0.5);
+    	Robot.driveTrain.driveCertainAmounts(-0.58, -0.41);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.gear.isGearIn()){
+    	if(timer.get() > 3.1){
     		Robot.driveTrain.stop(); 
-    		Robot.gear.retract(); 
-
     		done = true; 
+
     	}
+//    	if(Robot.gear.isGearIn()){
+//    		Robot.gear.retract(); 
+//
+//    		done = true; 
+//    	}
 //    	if(Robot.driveTrain.getEncoderTwo() >= 1300){
 //    		Robot.driveTrain.stop(); 
 //    	}

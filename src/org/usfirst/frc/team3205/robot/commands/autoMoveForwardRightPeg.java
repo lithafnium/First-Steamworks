@@ -1,62 +1,52 @@
 package org.usfirst.frc.team3205.robot.commands;
 
 import org.usfirst.frc.team3205.robot.Robot;
-import org.usfirst.frc.team3205.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-
-
 
 /**
  *
  */
-public class climber extends Command {
-	double startDistance; 
-	boolean done = false; 
-    public climber() {
+public class autoMoveForwardRightPeg extends Command {
+	Timer timer; 
+	boolean done; 
+    public autoMoveForwardRightPeg() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.climb); 
+    	requires(Robot.driveTrain); 
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.climb.resetEncoder();
-    	//Robot.climb.initialPosition = Robot.climb.getDistance(); 
-    	//startDistance = Robot.climb.getDistance(); 
-
-    	Robot.climb.climb(); 
-
+    	timer.start(); 
+    	Robot.driveTrain.driveCertainAmounts(0.5, 0.6);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// change later 
-//    	if(Robot.climb.motorStall() || Robot.climb.getDistance() - startDistance >= 20 || Robot.climb.climbingLimit()){
-//    		Robot.climb.stop(); 
-//    		done = true; 
-//    	}
-    	
-    	if(RobotMap.climberHit){
-    		Robot.climb.stop(); 
-        	//Robot.climb.resetEncoder();
+    	if(timer.get() > 3.1){
+    		Robot.driveTrain.stop(); 
+    		done = true; 
+
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return RobotMap.climberHit; 
+        return done;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climb.stop(); 
+		Robot.driveTrain.stop(); 
+
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-		Robot.climb.stop();
+		Robot.driveTrain.stop(); 
 
     }
 }

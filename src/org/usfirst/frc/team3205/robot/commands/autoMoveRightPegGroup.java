@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class autoMoveLeftPegGroup extends CommandGroup {
+public class autoMoveRightPegGroup extends CommandGroup {
 
-    public autoMoveLeftPegGroup() {
+    public autoMoveRightPegGroup() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,13 +24,12 @@ public class autoMoveLeftPegGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new autoMoveForwardLeftPeg()); 
+    	addSequential(new autoMoveForwardRightPeg()); 
     	addSequential(new autoStop()); 
     	addSequential(new autoMoveForwardCenterPeg()); 
     	addSequential(new autoStop()); 
 
-//    	addSequential(new autoTurnToLeftPeg()); 
-//    	addSequential(new autoMoveToLeftPeg()); 
-    	addSequential(new autoMoveBack()); 
+ 
+    	addSequential(new autoMoveBack());
     }
 }

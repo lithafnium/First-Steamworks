@@ -26,8 +26,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
+
+
 import org.usfirst.frc.team3205.robot.commands.autoMoveCenterPegGroup;
 import org.usfirst.frc.team3205.robot.commands.autoMoveLeftPegGroup;
+import org.usfirst.frc.team3205.robot.commands.autoMoveRightPegGroup;
+import org.usfirst.frc.team3205.robot.commands.climberBooleanReset;
 import org.usfirst.frc.team3205.robot.commands.nothing;
 //import org.usfirst.frc.team3205.robot.commands.resetArmEncoder;
 import org.usfirst.frc.team3205.robot.commands.resetClimberEncoders;
@@ -78,6 +82,7 @@ public class Robot extends IterativeRobot {
 		chooser = new SendableChooser();
        // chooser.addObject("Gear", new visionAutonomous());
         chooser.addObject("Gear Left Peg", new autoMoveLeftPegGroup() );
+        chooser.addObject("Gear right Peg", new autoMoveRightPegGroup()); 
         chooser.addObject("Gear Center Peg", new autoMoveCenterPegGroup() );
 
         chooser.addObject("Nothing", new nothing()); 
@@ -85,6 +90,8 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData("Reset climber Encoder", new resetClimberEncoders());
         SmartDashboard.putData("Reset DriveTrain Encoders", new resetDriveTrainEncoders());
+        SmartDashboard.putData("Reset Climber Limitswitch", new climberBooleanReset());
+
 
 				
 		//chooser.addDefault("Default Auto", new ExampleCommand());
