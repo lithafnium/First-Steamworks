@@ -4,6 +4,8 @@ import org.usfirst.frc.team3205.robot.Robot;
 import org.usfirst.frc.team3205.robot.RobotMap;
 import org.usfirst.frc.team3205.robot.commands.drive;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
@@ -26,8 +28,8 @@ public class DriveTrain extends Subsystem {
 
 
 	public boolean backWards = false; 
-	AnalogGyro gyroSensor; 
-
+	//AnalogGyro gyroSensor; 
+	ADXRS450_Gyro gyroSensor;  
 	Encoder one; 
 	Encoder two; 
 	RobotDrive robotDrive; 
@@ -45,10 +47,14 @@ public class DriveTrain extends Subsystem {
 		//		ultraOne = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_ONE, RobotMap.ULTRA_TRIGGER_INPUT_ONE); 
 		//		ultraTwo = new Ultrasonic(RobotMap.ULTRA_PULSE_OUTPUT_TWO, RobotMap.ULTRA_TRIGGER_INPUT_TWO); 
 
-		one = new Encoder(RobotMap.DRIVE_BASE_ENCODER_ONE_PORT_ONE,RobotMap.DRIVE_BASE_ENCODER_ONE_PORT_TWO, false, Encoder.EncodingType.k4X);
+		//one = new Encoder(RobotMap.DRIVE_BASE_ENCODER_ONE_PORT_ONE,RobotMap.DRIVE_BASE_ENCODER_ONE_PORT_TWO, false, Encoder.EncodingType.k4X);
 		two = new Encoder(RobotMap.DRIVE_BASE_ENCODER_TWO_PORT_ONE,RobotMap.DRIVE_BASE_ENCODER_TWO_PORT_TWO, false, Encoder.EncodingType.k4X);
 
 		//gyroSensor = new AnalogGyro(RobotMap.GYRO_PORT); 
+		gyroSensor = new ADXRS450_Gyro();
+		gyroSensor.reset(); 
+
+		gyroSensor.calibrate();
 		//calibrateGyro();
 
 	}
@@ -74,8 +80,6 @@ public class DriveTrain extends Subsystem {
 			robotDrive.tankDrive(right, left);
 		}
 	}
-
-	 
 
 	public void driveCertainAmounts(double left, double right){
 		robotDrive.tankDrive(left, right); 
@@ -127,7 +131,7 @@ public class DriveTrain extends Subsystem {
 		//		SmartDashboard.putNumber("Ultrasonic sensor one", getDistanceOne()); 
 		//		SmartDashboard.putNumber("Ultrasonic sensor two", getDistanceTwo()); 
 
-		SmartDashboard.putNumber("Drive Encoder One - Right Side", getEncoderOne());
+		//SmartDashboard.putNumber("Drive Encoder One - Right Side", getEncoderOne());
 		SmartDashboard.putNumber("Drive Encoder Two - Left Side", getEncoderTwo());
 
 		SmartDashboard.putBoolean("Backwards:" , backWards);  

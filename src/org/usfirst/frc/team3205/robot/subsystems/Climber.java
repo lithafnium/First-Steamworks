@@ -92,7 +92,7 @@ public class Climber extends Subsystem {
 	}
 	public void updateSmartDashboard(){
     	//SmartDashboard.putNumber("Drive Encoder One", );
-    	SmartDashboard.putBoolean("Hit climb", climbingLimit());
+		SmartDashboard.putBoolean("Hit climb", climbingLimit());
     	SmartDashboard.putNumber("Current", getCurrent());
     	SmartDashboard.putNumber("Climber Encoder", getDistance());
     }

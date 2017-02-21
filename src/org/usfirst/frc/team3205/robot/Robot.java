@@ -23,6 +23,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
+
+
+
+import org.usfirst.frc.team3205.robot.commands.autoMoveCenterPegGroup;
+import org.usfirst.frc.team3205.robot.commands.autoMoveLeftPegGroup;
+import org.usfirst.frc.team3205.robot.commands.nothing;
 //import org.usfirst.frc.team3205.robot.commands.resetArmEncoder;
 import org.usfirst.frc.team3205.robot.commands.resetClimberEncoders;
 import org.usfirst.frc.team3205.robot.commands.resetDriveTrainEncoders;
@@ -70,7 +76,11 @@ public class Robot extends IterativeRobot {
 		vision = new Vision();
 		oi = new OI();
 		chooser = new SendableChooser();
-        chooser.addObject("Gear", new visionAutonomous());
+       // chooser.addObject("Gear", new visionAutonomous());
+        chooser.addObject("Gear Left Peg", new autoMoveLeftPegGroup() );
+        chooser.addObject("Gear Center Peg", new autoMoveCenterPegGroup() );
+
+        chooser.addObject("Nothing", new nothing()); 
         SmartDashboard.putData("Auto mode", chooser);
         
         SmartDashboard.putData("Reset climber Encoder", new resetClimberEncoders());

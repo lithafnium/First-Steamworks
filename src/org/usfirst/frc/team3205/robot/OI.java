@@ -6,6 +6,7 @@ import org.usfirst.frc.team3205.robot.commands.climber;
 import org.usfirst.frc.team3205.robot.commands.climberReset;
 import org.usfirst.frc.team3205.robot.commands.driveBaseSwitchDirections;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapClose;
+import org.usfirst.frc.team3205.robot.commands.dumpFlapStartClose;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapOpen;
 import org.usfirst.frc.team3205.robot.commands.hopperUnCoil;
 import org.usfirst.frc.team3205.robot.commands.intakeFlapClose;
@@ -93,26 +94,26 @@ public class OI {
 		Button c11 = new JoystickButton(controller, 11);
 		Button c12 = new JoystickButton(controller, 12);
 
-	public static Joystick xbox = new Joystick(2);
-		Button x1 = new JoystickButton(xbox, 1);
-		Button x2 = new JoystickButton(xbox, 2);
-		Button x3 = new JoystickButton(xbox, 3);
-		Button x4 = new JoystickButton(xbox, 4);
-		Button x5 = new JoystickButton(xbox, 5);
-		Button x6 = new JoystickButton(xbox, 6);
-		Button x7 = new JoystickButton(xbox, 7);
-		Button x8 = new JoystickButton(xbox, 8);
-		Button x9 = new JoystickButton(xbox, 9);
-		Button x10 = new JoystickButton(xbox, 10);
+//	public static Joystick xbox = new Joystick(2);
+//		Button x1 = new JoystickButton(xbox, 1);
+//		Button x2 = new JoystickButton(xbox, 2);
+//		Button x3 = new JoystickButton(xbox, 3);
+//		Button x4 = new JoystickButton(xbox, 4);
+//		Button x5 = new JoystickButton(xbox, 5);
+//		Button x6 = new JoystickButton(xbox, 6);
+//		Button x7 = new JoystickButton(xbox, 7);
+//		Button x8 = new JoystickButton(xbox, 8);
+//		Button x9 = new JoystickButton(xbox, 9);
+//		Button x10 = new JoystickButton(xbox, 10);
 		
 	public OI(){
-		//c6.whileHeld(new dumpFlapOpen());
-		//c8.whileHeld(new dumpFlapClose()); 
-		c9.whileHeld(new intakeFlapOpen());
-		c10.whileHeld(new intakeFlapClose()); 
+		c6.whenPressed(new dumpFlapOpen());
+		c8.whenPressed(new dumpFlapClose()); 
+//		c9.whenPressed(new intakeFlapOpen());
+//		c10.whenPressed(new intakeFlapClose()); 
 		
-		c5.whenPressed(new pushGearOut());
-		c7.whenPressed(new pushGearIn()); 
+//		c5.whenPressed(new pushGearOut());
+//		c7.whenPressed(new pushGearIn()); 
 		
 //		c5.whenActive(new pushGearOut());
 //		c7.whenActive(new pushGearIn()); 
@@ -124,7 +125,7 @@ public class OI {
 		c4.whileHeld(new hopperCoil());
 		c3.whileHeld(new hopperUnCoil());
 		c1.whileHeld(new climber());
-		c2.whileHeld(new climberReset());
+		c2.whenPressed(new climberReset());
 		c11.toggleWhenPressed(new cameraOneInit());
 		c12.toggleWhenPressed(new cameraTwoInit());
 

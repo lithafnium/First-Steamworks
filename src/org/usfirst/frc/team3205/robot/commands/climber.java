@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3205.robot.commands;
 
 import org.usfirst.frc.team3205.robot.Robot;
+import org.usfirst.frc.team3205.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,9 +21,9 @@ public class climber extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.climb.resetEncoder();
-    	Robot.climb.initialPosition = Robot.climb.getDistance(); 
-    	startDistance = Robot.climb.getDistance(); 
+    	//Robot.climb.resetEncoder();
+    	//Robot.climb.initialPosition = Robot.climb.getDistance(); 
+    	//startDistance = Robot.climb.getDistance(); 
 
     	Robot.climb.climb(); 
 
@@ -36,16 +37,20 @@ public class climber extends Command {
 //    		done = true; 
 //    	}
     	if(Robot.climb.climbingLimit()){
-    		Robot.climb.stop(); 
-        	Robot.climb.resetEncoder();
+    		RobotMap.climberHit = true; 
+    		
 
     		//done = true; 
+    	}
+    	if(RobotMap.climberHit){
+    		Robot.climb.stop(); 
+        	//Robot.climb.resetEncoder();
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.climb.climbingLimit(); 
+        return RobotMap.climberHit; 
     }
 
     // Called once after isFinished returns true

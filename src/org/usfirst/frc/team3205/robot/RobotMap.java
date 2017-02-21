@@ -18,7 +18,7 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	
 	//MOTORSPEEDS
-	public static final double COIL = 0.1; 
+	public static final double COIL = 0.2; 
 	public static final double CLIMB_SPEED = -.6; 
 	
 	//LIMIT SWITCHES 
@@ -82,6 +82,7 @@ public class RobotMap {
     public static final double PDP_STALL = 20.0;  // if the motor is stalling 
     public static boolean switchDirection = true; 
 	public static boolean camTwoStart = true;
-	public static boolean camOneStart = true; ;
+	public static boolean camOneStart = true; 
+	public static boolean climberHit = false; 
 
 }

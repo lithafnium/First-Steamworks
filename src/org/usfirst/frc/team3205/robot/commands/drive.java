@@ -22,10 +22,21 @@ public class drive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(Robot.gear.isGearIn()){
+		if(Robot.gear.isGearIn() || OI.controller.getRawButton(7)){
 			//Robot.driveTrain.stop(); 
 			Robot.gear.retract();
 		}
+		if(OI.controller.getRawButton(5)){
+			Robot.gear.pushOut();
+		}
+		
+		if(OI.controller.getRawButton(9)){
+			Robot.box.openIntakeFlap();
+		}
+		if(OI.controller.getRawButton(10)){
+			Robot.box.closeIntakeFlap();
+		}
+		
 		Robot.driveTrain.driveNow(OI.left, OI.right);
 		//Robot.driveTrain.backwards(OI.right, OI.left); 
 	}

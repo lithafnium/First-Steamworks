@@ -17,7 +17,7 @@ public class resetDriveTrainEncoders extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.reset1stEncoder();
+    	//Robot.driveTrain.reset1stEncoder();
     	Robot.driveTrain.reset2ndEncoder();
     }
 
