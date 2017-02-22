@@ -17,7 +17,6 @@ public class resetDriveTrainEncoders extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.driveTrain.reset1stEncoder();
     	Robot.driveTrain.reset2ndEncoder();
     }
 
@@ -27,7 +26,7 @@ public class resetDriveTrainEncoders extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

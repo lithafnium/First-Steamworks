@@ -25,7 +25,7 @@ public class autoMoveBack extends Command {
     	
     	timer.start(); 
     	
-    	Robot.driveTrain.driveCertainAmounts(0.5, 0.5);
+    	Robot.driveTrain.driveCertainAmounts(0.4, 0.4);
     }
 
     // Called repeatedly when this Command is scheduled to run

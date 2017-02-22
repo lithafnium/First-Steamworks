@@ -89,7 +89,7 @@ public class Climber extends Subsystem {
 		SmartDashboard.putNumber("Current", getCurrent());
 		SmartDashboard.putNumber("Climber Encoder", getDistance());
 
-		//SmartDashboard.putBoolean("Reset Climber", RobotMap.climberHit); 
+		SmartDashboard.putBoolean("Reset Climber", RobotMap.climberHit); 
 	}
 
 }

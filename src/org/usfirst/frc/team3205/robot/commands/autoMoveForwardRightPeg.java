@@ -14,18 +14,20 @@ public class autoMoveForwardRightPeg extends Command {
     public autoMoveForwardRightPeg() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	timer = new Timer(); 
+
     	requires(Robot.driveTrain); 
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	timer.start(); 
-    	Robot.driveTrain.driveCertainAmounts(-0.5, -0.6);
+    	Robot.driveTrain.driveCertainAmounts(-0.4, -0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(timer.get() > 3.1){
+    	if(timer.get() > 4.7){
     		Robot.driveTrain.stop(); 
     		done = true; 
 
