@@ -52,7 +52,6 @@ public class Gear extends Subsystem {
 //	}
 	public void updateSmartDashboard(){
 		SmartDashboard.putBoolean("Is Gear in", isGearIn());
-		//SmartDashboard.putNumber("Linear Actuator Angle", getAngle()); 
 	}
 }
 
