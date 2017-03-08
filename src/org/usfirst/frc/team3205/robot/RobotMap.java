@@ -18,8 +18,10 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	
 	//MOTORSPEEDS
-	public static final double COIL = 0.2; 
-	public static final double CLIMB_SPEED = -.6; 
+	public static final double COIL = 0.6; 
+	public static final double CLIMB_SPEED = -.8; 
+	public static final double RESET_CLIMB_SPEED = -.6; 
+
 	
 	//LIMIT SWITCHES 
 	public static final int IS_GEAR_IN = 9; 

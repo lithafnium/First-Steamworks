@@ -19,7 +19,7 @@ public class climberReset extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	//initial = Robot.climb.initialPosition; 
-    	Robot.climb.climb();
+    	Robot.climb.resetClimb();
     }
 
     // Called repeatedly when this Command is scheduled to run

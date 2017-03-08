@@ -1,32 +1,61 @@
 package org.usfirst.frc.team3205.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team3205.robot.Robot;
+
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class dumpFlapClose extends CommandGroup {
-
+public class dumpFlapClose extends Command {
+	Timer timer; 
+	boolean done = false; 
     public dumpFlapClose() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.box); 
+    }
 
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	timer = new Timer(); 
+    	timer.start(); 
 
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
-    	addSequential(new dumpFlapStartClose()); 
-    	addSequential(new dumpFlapCloseLittleBit());
-    	addSequential(new dumpFlapCloseCompletely());
+    	Robot.box.closeFlap();
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	if(timer.get() > 3.0){
+    		Robot.box.stopFlap(); 
+    		done = true; 
+    	}
+//    	if(Robot.box.isFlapBack()){
+//    		Robot.box.stopFlap();
+//    		done = true; 
+//    	}
+
+    	
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+		Robot.box.stopFlap(); 
+
+        return done;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+		Robot.box.stopFlap(); 
+
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+		Robot.box.stopFlap(); 
 
     }
 }

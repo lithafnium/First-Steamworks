@@ -49,6 +49,11 @@ public class Climber extends Subsystem {
 
 
 	}
+	public void resetClimb(){
+		two.set(RobotMap.RESET_CLIMB_SPEED); 
+		one.set(RobotMap.RESET_CLIMB_SPEED); 
+
+	}
 
 	public double getDistance(){
 		return climbDistance.get(); 

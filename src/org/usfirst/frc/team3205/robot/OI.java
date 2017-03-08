@@ -6,7 +6,7 @@ import org.usfirst.frc.team3205.robot.commands.climber;
 import org.usfirst.frc.team3205.robot.commands.climberReset;
 import org.usfirst.frc.team3205.robot.commands.driveBaseSwitchDirections;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapClose;
-import org.usfirst.frc.team3205.robot.commands.dumpFlapStartClose;
+import org.usfirst.frc.team3205.robot.commands.dumpFlapClose;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapOpen;
 import org.usfirst.frc.team3205.robot.commands.hopperUnCoil;
 import org.usfirst.frc.team3205.robot.commands.intakeFlapClose;
@@ -109,6 +109,7 @@ public class OI {
 	public OI(){
 		c6.whenPressed(new dumpFlapOpen());
 		c8.whenPressed(new dumpFlapClose()); 
+		l7.whenPressed(new dumpFlapOpen());
 //		c9.whenPressed(new intakeFlapOpen());
 //		c10.whenPressed(new intakeFlapClose()); 
 		

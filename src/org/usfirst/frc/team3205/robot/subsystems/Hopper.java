@@ -77,7 +77,7 @@ public class Hopper extends Subsystem {
     }
     // outake flap
     public void openFlap(){
-    	outtakeFlap.set(0.5);
+    	outtakeFlap.set(0.3);
     }
     // outtake flap
     public void closeFlap(){
