@@ -26,7 +26,7 @@ public class autoStop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(timer.get() > 2.0){
+    	if(timer.get() > 0.5){ //Originally timer.get() > 2.0
     		done = true; 
     	}
     }

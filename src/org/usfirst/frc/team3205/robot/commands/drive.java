@@ -38,8 +38,23 @@ public class drive extends Command {
 		if(OI.controller.getRawButton(10)){
 			Robot.box.closeIntakeFlap();
 		}
+		
+//		if(Robot.gear.isGearIn() || OI.xbox.getRawButton(3)){
+//			//Robot.driveTrain.stop(); 
+//			Robot.gear.retract();
+//		}
+//		if(OI.xbox.getRawButton(4)){
+//			Robot.gear.pushOut();
+//		}
+//		
+//		if(OI.xbox.getRawButton(6)){
+//			Robot.box.openIntakeFlap();
+//		}
+//		if(OI.xbox.getRawButton(7)){
+//			Robot.box.closeIntakeFlap();
+//		}
 		if(Robot.climb.climbingLimit()){
-    		RobotMap.climberHit = true; 
+    		//RobotMap.climberHit = true; 
     		
 
     		//done = true; 

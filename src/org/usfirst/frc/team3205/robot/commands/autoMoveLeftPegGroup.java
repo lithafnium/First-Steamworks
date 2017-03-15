@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3205.robot.commands;
 
+import org.usfirst.frc.team3205.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -28,9 +30,16 @@ public class autoMoveLeftPegGroup extends CommandGroup {
     	addSequential(new autoStop()); 
     	addSequential(new autoMoveForwardCenterPeg()); 
     	addSequential(new autoStop()); 
-
+    	
+    	
+    	
+    	
+    		addSequential(new autoMoveBack());
+        	addSequential(new autoTurnForwardLeftPeg()); 
+        	addSequential(new autoMoveForwardShortTime()); 
+    	
 //    	addSequential(new autoTurnToLeftPeg()); 
 //    	addSequential(new autoMoveToLeftPeg()); 
-    	addSequential(new autoMoveBack()); 
+    	
     }
 }

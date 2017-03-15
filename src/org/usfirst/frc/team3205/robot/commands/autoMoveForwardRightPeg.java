@@ -22,12 +22,13 @@ public class autoMoveForwardRightPeg extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	timer.start(); 
+    	Robot.gear.pushOut(); 
     	Robot.driveTrain.driveCertainAmounts(-0.4, -0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(timer.get() > 4.7){
+    	if(timer.get() > 4.6){
     		Robot.driveTrain.stop(); 
     		done = true; 
 

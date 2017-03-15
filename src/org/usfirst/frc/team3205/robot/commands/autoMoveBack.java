@@ -30,7 +30,7 @@ public class autoMoveBack extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(timer.get() > 3.0){
+    	if(timer.get() > 4.5){
     		Robot.driveTrain.stop(); 
     		done = true; 
     		

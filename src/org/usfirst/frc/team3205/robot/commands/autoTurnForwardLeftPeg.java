@@ -8,42 +8,29 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class autoMoveForwardLeftPeg extends Command {
+public class autoTurnForwardLeftPeg extends Command {
 	boolean done; 
 	Timer timer; 
-    public autoMoveForwardLeftPeg() {
+    public autoTurnForwardLeftPeg() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain); 
-    	requires(Robot.gear);
     	timer = new Timer(); 
-
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	timer.start(); 
-    	Robot.gear.pushOut(); 
-    	Robot.driveTrain.driveCertainAmounts(-0.575, -0.4115);
+    	Robot.driveTrain.driveCertainAmounts(0.5, -0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	if(timer.get() > 3.2){
+    	if(timer.get() > 0.9){
     		Robot.driveTrain.stop(); 
     		done = true; 
-
     	}
     	
-//    	if(Robot.gear.isGearIn()){
-//    		Robot.gear.retract(); 
-//
-//    		done = true; 
-//    	}
-//    	if(Robot.driveTrain.getEncoderTwo() >= 1300){
-//    		Robot.driveTrain.stop(); 
-//    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -53,14 +40,13 @@ public class autoMoveForwardLeftPeg extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-		Robot.driveTrain.stop(); 
-
+    	Robot.driveTrain.stop(); 
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-		Robot.driveTrain.stop(); 
+    	Robot.driveTrain.stop(); 
 
     }
 }

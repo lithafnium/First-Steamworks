@@ -20,13 +20,13 @@ public class autoMoveForwardShortTime extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	timer = new Timer(); 
-    	Robot.driveTrain.driveCertainAmounts(0.4, 0.4);
+    	Robot.driveTrain.driveCertainAmounts(-0.6, -0.6);
     	timer.start(); 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(timer.get() > 0.5){
+    	if(timer.get() > 1.5){
     		Robot.driveTrain.stop(); 
     		done = true; 
     		timer.reset(); 

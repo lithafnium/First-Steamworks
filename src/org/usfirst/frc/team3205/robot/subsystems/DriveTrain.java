@@ -69,7 +69,7 @@ public class DriveTrain extends Subsystem {
 			bottomLeft.setInverted(true);
 			topRight.setInverted(true);
 			bottomRight.setInverted(true);
-			robotDrive.tankDrive(left, right);
+			robotDrive.tankDrive(left, right, true);
 
 		}
 		else{
@@ -77,7 +77,7 @@ public class DriveTrain extends Subsystem {
 			bottomLeft.setInverted(false);
 			topRight.setInverted(false);
 			bottomRight.setInverted(false);
-			robotDrive.tankDrive(right, left);
+			robotDrive.tankDrive(right, left, true);
 		}
 	}
 

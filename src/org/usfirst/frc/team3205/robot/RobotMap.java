@@ -86,5 +86,6 @@ public class RobotMap {
 	public static boolean camTwoStart = true;
 	public static boolean camOneStart = true; 
 	public static boolean climberHit = false; 
+	public static boolean goBack = false; 
 
 }
