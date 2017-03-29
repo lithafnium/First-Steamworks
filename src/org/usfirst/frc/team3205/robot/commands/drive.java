@@ -2,6 +2,8 @@ package org.usfirst.frc.team3205.robot.commands;
 
 import org.usfirst.frc.team3205.robot.OI;
 import org.usfirst.frc.team3205.robot.Robot;
+import org.usfirst.frc.team3205.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -22,10 +24,42 @@ public class drive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(Robot.gear.isGearIn()){
+		if(Robot.gear.isGearIn() || OI.controller.getRawButton(7)){
 			//Robot.driveTrain.stop(); 
 			Robot.gear.retract();
 		}
+		if(OI.controller.getRawButton(5)){
+			Robot.gear.pushOut();
+		}
+		
+		if(OI.controller.getRawButton(9)){
+			Robot.box.openIntakeFlap();
+		}
+		if(OI.controller.getRawButton(10)){
+			Robot.box.closeIntakeFlap();
+		}
+		
+//		if(Robot.gear.isGearIn() || OI.xbox.getRawButton(3)){
+//			//Robot.driveTrain.stop(); 
+//			Robot.gear.retract();
+//		}
+//		if(OI.xbox.getRawButton(4)){
+//			Robot.gear.pushOut();
+//		}
+//		
+//		if(OI.xbox.getRawButton(6)){
+//			Robot.box.openIntakeFlap();
+//		}
+//		if(OI.xbox.getRawButton(7)){
+//			Robot.box.closeIntakeFlap();
+//		}
+		if(Robot.climb.climbingLimit()){
+    		//RobotMap.climberHit = true; 
+    		
+
+    		//done = true; 
+    	}
+		
 		Robot.driveTrain.driveNow(OI.left, OI.right);
 		//Robot.driveTrain.backwards(OI.right, OI.left); 
 	}

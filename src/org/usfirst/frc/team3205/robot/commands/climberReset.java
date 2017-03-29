@@ -19,12 +19,12 @@ public class climberReset extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	//initial = Robot.climb.initialPosition; 
-    	Robot.climb.climb();
+    	Robot.climb.resetClimb();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.climb.getDistance() > 1800){
+    	if(Robot.climb.getDistance() > 6270){
     		Robot.climb.stop(); 
     		done = true; 
     	}
@@ -37,10 +37,14 @@ public class climberReset extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+		Robot.climb.stop(); 
+
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+		Robot.climb.stop(); 
+
     }
 }

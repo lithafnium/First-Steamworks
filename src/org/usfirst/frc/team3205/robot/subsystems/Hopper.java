@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3205.robot.subsystems;
 
 import org.usfirst.frc.team3205.robot.RobotMap;
+import org.usfirst.frc.team3205.robot.commands.intakeFlapClose;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -47,6 +48,7 @@ public class Hopper extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new intakeFlapClose()); 
     }
     
     public void coil(){
@@ -70,13 +72,16 @@ public class Hopper extends Subsystem {
     	coil.set(0.0);
     	
     }
+    public void openFlapSlow(){
+    	outtakeFlap.set(0.1); 
+    }
     // outake flap
     public void openFlap(){
-    	outtakeFlap.set(1.0);
+    	outtakeFlap.set(0.3);
     }
     // outtake flap
     public void closeFlap(){
-    	outtakeFlap.set(-0.5); 
+    	outtakeFlap.set(-0.3); 
     }
     // outtake flap 
     public void stopFlap(){

@@ -39,7 +39,7 @@ public class Gear extends Subsystem {
 	}
 
 	public void pushOut(){ // this actually pulls in the gear 
-		gearOut.set(0.8); 
+		gearOut.set(0.60); 
 		//gearOut.setAngle(45);
 	}
 

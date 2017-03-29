@@ -6,6 +6,7 @@ import org.usfirst.frc.team3205.robot.commands.climber;
 import org.usfirst.frc.team3205.robot.commands.climberReset;
 import org.usfirst.frc.team3205.robot.commands.driveBaseSwitchDirections;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapClose;
+import org.usfirst.frc.team3205.robot.commands.dumpFlapClose;
 import org.usfirst.frc.team3205.robot.commands.dumpFlapOpen;
 import org.usfirst.frc.team3205.robot.commands.hopperUnCoil;
 import org.usfirst.frc.team3205.robot.commands.intakeFlapClose;
@@ -93,26 +94,73 @@ public class OI {
 		Button c11 = new JoystickButton(controller, 11);
 		Button c12 = new JoystickButton(controller, 12);
 
-	public static Joystick xbox = new Joystick(2);
-		Button x1 = new JoystickButton(xbox, 1);
-		Button x2 = new JoystickButton(xbox, 2);
-		Button x3 = new JoystickButton(xbox, 3);
-		Button x4 = new JoystickButton(xbox, 4);
-		Button x5 = new JoystickButton(xbox, 5);
-		Button x6 = new JoystickButton(xbox, 6);
-		Button x7 = new JoystickButton(xbox, 7);
-		Button x8 = new JoystickButton(xbox, 8);
-		Button x9 = new JoystickButton(xbox, 9);
-		Button x10 = new JoystickButton(xbox, 10);
+//	public static Joystick xbox = new Joystick(2);
+//		Button x1 = new JoystickButton(xbox, 1);
+//		Button x2 = new JoystickButton(xbox, 2);
+//		Button x3 = new JoystickButton(xbox, 3);
+//		Button x4 = new JoystickButton(xbox, 4);
+//		Button x5 = new JoystickButton(xbox, 5);
+//		Button x6 = new JoystickButton(xbox, 6);
+//		Button x7 = new JoystickButton(xbox, 7);
+//		Button x8 = new JoystickButton(xbox, 8);
+//		Button x9 = new JoystickButton(xbox, 9);
+//		Button x10 = new JoystickButton(xbox, 10);
 		
+		// 1: A
+		// 2: B
+		// 3: X 
+		// 4: Y 
+		// 5: left bumper 
+		// 6: right bumper 
+		// 7: back
+		// 8: start
+		// 9: left joystick 
+		// 10: right joystick 
 	public OI(){
-		//c6.whileHeld(new dumpFlapOpen());
-		//c8.whileHeld(new dumpFlapClose()); 
-		c9.whileHeld(new intakeFlapOpen());
-		c10.whileHeld(new intakeFlapClose()); 
 		
-		c5.whenPressed(new pushGearOut());
-		c7.whenPressed(new pushGearIn()); 
+	//	c6.whenPressed(new dumpFlapOpen());
+		//c8.whenPressed(new dumpFlapClose()); 
+//		l7.whenPressed(new dumpFlapOpen());
+//
+//		x3.whileHeld(new hopperCoil());
+//		x1.whileHeld(new hopperUnCoil());
+//		x2.whileHeld(new climber());
+//		x0.whenPressed(new climberReset());
+//		x8.toggleWhenPressed(new cameraOneInit());
+//		x9.toggleWhenPressed(new cameraTwoInit());
+//
+//		r1.toggleWhenPressed(new driveBaseSwitchDirections());
+		//l1.toggleWhenPressed(new visionSwitchCameras());
+		
+		/* logitech controller */
+		c6.whenPressed(new dumpFlapOpen());
+		c8.whenPressed(new dumpFlapClose()); 
+		l7.whenPressed(new dumpFlapOpen());
+
+		c4.whileHeld(new hopperCoil());
+		c3.whileHeld(new hopperUnCoil());
+		c1.whileHeld(new climber());
+		c2.whenPressed(new climberReset());
+		c11.toggleWhenPressed(new cameraOneInit());
+		c12.toggleWhenPressed(new cameraTwoInit());
+
+		r1.toggleWhenPressed(new driveBaseSwitchDirections());
+		l1.toggleWhenPressed(new visionSwitchCameras());
+		
+		
+		
+		
+		
+		/* TRASH CONTROLS */
+		//l7.whenPressed(new resetClimberBoolean());
+		//r1.whenPressed(new visionSwitchCameras());
+//		l1.whenPressed(new visionSwitchCameras());
+		//r1.whenActive(new visionSwitchCameras());
+//		c9.whenPressed(new intakeFlapOpen());
+//		c10.whenPressed(new intakeFlapClose()); 
+		
+//		c5.whenPressed(new pushGearOut());
+//		c7.whenPressed(new pushGearIn()); 
 		
 //		c5.whenActive(new pushGearOut());
 //		c7.whenActive(new pushGearIn()); 
@@ -121,17 +169,5 @@ public class OI {
 //
 //		c5.whileHeld(new pushGearOut());
 //		c7.whileHeld(new pushGearIn()); 
-		c4.whileHeld(new hopperCoil());
-		c3.whileHeld(new hopperUnCoil());
-		c1.whileHeld(new climber());
-		c2.whileHeld(new climberReset());
-		c11.toggleWhenPressed(new cameraOneInit());
-		c12.toggleWhenPressed(new cameraTwoInit());
-
-		r1.toggleWhenPressed(new driveBaseSwitchDirections());
-		l1.toggleWhenPressed(new visionSwitchCameras());
-		//r1.whenPressed(new visionSwitchCameras());
-//		l1.whenPressed(new visionSwitchCameras());
-		//r1.whenActive(new visionSwitchCameras());
 	}
 }
