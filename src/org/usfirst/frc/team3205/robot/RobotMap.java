@@ -87,5 +87,17 @@ public class RobotMap {
 	public static boolean camOneStart = true; 
 	public static boolean climberHit = false; 
 	public static boolean goBack = false; 
+	
+	public static final double kP = 0.0; 
+	public static final double kI = 0.0; 
+
+	public static final double kD = 0.0; 
+	public static final double MIN_ANGLE = -180.0;
+	public static final double MAX_ANGLE = 180.0;
+	public static final double TOLERANCE = 0.5;
+	
+	public static final double ALIGN_STEADY_TIME = 100; 
+
+
 
 }

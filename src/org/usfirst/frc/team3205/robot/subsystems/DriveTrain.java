@@ -29,7 +29,7 @@ public class DriveTrain extends Subsystem {
 
 	public boolean backWards = false; 
 	//AnalogGyro gyroSensor; 
-	ADXRS450_Gyro gyroSensor;  
+	public ADXRS450_Gyro gyroSensor;  
 	Encoder one; 
 	Encoder two; 
 	RobotDrive robotDrive; 
